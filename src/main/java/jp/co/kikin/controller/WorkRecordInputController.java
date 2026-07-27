@@ -77,7 +77,7 @@ public class WorkRecordInputController {
     @RequestMapping(value = SCREEN_PATH)
     public String init(HttpServletRequest request, HttpSession session, Model model, WorkRecordInputForm form, BindingResult bindingResult)
             throws Exception {
-        return view("init", request, session, model, form);
+        return view("init", request, session, model, form, bindingResult);
     }
     
     /**
