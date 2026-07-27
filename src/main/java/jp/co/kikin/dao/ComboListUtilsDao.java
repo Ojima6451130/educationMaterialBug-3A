@@ -117,6 +117,13 @@ public class ComboListUtilsDao extends Dao {
 
             StringBuffer strSql = new StringBuffer();
            
+            strSql.append("SELECT * ");
+            strSql.append("FROM ");
+            strSql.append("m_shift ");
+            strSql.append("ORDER BY shift_id ");
+//            strSql.append("SELECT employee_id, ");
+//            strSql.append("CONCAT(CONCAT(employee_id ,':'), employee_name) employee_name ");
+//            strSql.append("m_employee ");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
