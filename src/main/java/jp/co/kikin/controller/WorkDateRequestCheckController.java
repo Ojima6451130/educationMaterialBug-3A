@@ -171,8 +171,8 @@ public class WorkDateRequestCheckController {
         //----------------
         // 対象年月
         model.addAttribute("yearMonthValues", yearMonthValues);
-        model.addAttribute("datebeanList", workDateRequestCheckBeanList);
-        model.addAttribute("workDateRequestCheckBeanList", dateBeanList);
+        model.addAttribute("datebeanList", dateBeanList);
+        model.addAttribute("workDateRequestCheckBeanList", workDateRequestCheckBeanList);
         model.addAttribute("saturday", saturday);
         model.addAttribute("sunday", sunday);
         return "workDateRequestCheck";
