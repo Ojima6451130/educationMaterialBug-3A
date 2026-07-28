@@ -117,13 +117,11 @@ public class ComboListUtilsDao extends Dao {
 
             StringBuffer strSql = new StringBuffer();
            
+//           No.4　椛島来未　画面が表示できない(出勤希日望入力) SQLの構文を追加
             strSql.append("SELECT * ");
             strSql.append("FROM ");
             strSql.append("m_shift ");
             strSql.append("ORDER BY shift_id ");
-//            strSql.append("SELECT employee_id, ");
-//            strSql.append("CONCAT(CONCAT(employee_id ,':'), employee_name) employee_name ");
-//            strSql.append("m_employee ");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
