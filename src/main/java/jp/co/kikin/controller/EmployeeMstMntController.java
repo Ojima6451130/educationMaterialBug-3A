@@ -58,7 +58,7 @@ public class EmployeeMstMntController {
     }
 
     // 社員マスタメンテナンス入力画面共通URL
-    public static final String SCREEN_PATH = "/employeeemployee";
+    public static final String SCREEN_PATH = "/employeeMstMnt";
 
     /**
      * 社員マスタメンテナンス初期表示アクションクラス
