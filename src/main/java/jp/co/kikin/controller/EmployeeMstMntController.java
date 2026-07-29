@@ -73,7 +73,7 @@ public class EmployeeMstMntController {
     @RequestMapping(value = SCREEN_PATH)
     public String Init(HttpServletRequest req, HttpSession session, EmployeeMstMntForm form, Model model)
             throws Exception {
-        return view(PROCCESS_TYPE.INIT, req, session, form, model);
+        return "EmployeeMstMnt";
     }
 
     private String view(PROCCESS_TYPE init, HttpServletRequest req, HttpSession session, EmployeeMstMntForm form, Model model)
