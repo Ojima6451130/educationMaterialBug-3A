@@ -90,7 +90,7 @@ public class ShiftMstMntController {
         // 戻り先を保存
         model.addAttribute("shiftMstMntDtoList", shiftMstMntDtoList);
 
-       return "しふとますためんて";
+       return "shiftMstMnt";
     }
     /**
      * シフトマスタメンテナンス登録画面遷移処理
