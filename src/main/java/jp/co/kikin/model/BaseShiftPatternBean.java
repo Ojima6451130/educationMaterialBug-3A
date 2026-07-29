@@ -23,7 +23,7 @@ public class BaseShiftPatternBean {
     private String breakTime;
 
 	public String getShiftName() {
-		return symbol;
+		return shiftName;
 	}
 	public void setShiftName(String shiftName) {
 		this.symbol = shiftName;
