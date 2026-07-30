@@ -198,7 +198,7 @@ public class MonthlyShiftCheckController {
         model.addAttribute("dateBeanList", dateBeanList);
         model.addAttribute("saturday", saturday);
         model.addAttribute("sunday", sunday);
-        return null;
+        return "monthlyShiftCheck";
     }
 
     /**
