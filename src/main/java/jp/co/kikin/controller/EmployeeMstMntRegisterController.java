@@ -83,6 +83,7 @@ public class EmployeeMstMntRegisterController {
 
         // ロジック生成
         EmployeeMstMntLogic employeeMstMntLogic = new EmployeeMstMntLogic();
+        employeeMstMntLogic.registerM_employee(m_employeeDto, loginUserDto);
 
         // 権限セレクトボックスの取得
         ComboListUtilLogic comboListUtils = new ComboListUtilLogic();

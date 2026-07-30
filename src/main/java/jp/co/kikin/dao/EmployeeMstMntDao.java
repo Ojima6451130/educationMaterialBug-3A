@@ -238,6 +238,12 @@ public class EmployeeMstMntDao extends Dao {
             this.connect();
 
             StringBuffer strSql = new StringBuffer();
+            
+            strSql.append("INSERT INTO ");
+            strSql.append("m_employee ");
+            strSql.append("(employee_id, password, employee_name, employee_name_kana, authority_id, creator_employee_id, updater_employee_id) ");
+            strSql.append("VALUES ");
+            strSql.append("(?,?,?,?,?,?,?) ");
            
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
