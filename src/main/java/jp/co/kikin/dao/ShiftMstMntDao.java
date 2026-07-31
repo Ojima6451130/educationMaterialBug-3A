@@ -223,7 +223,7 @@ public class ShiftMstMntDao extends Dao {
             strSql.append("shift_id, ");
             strSql.append("shift_name, ");
             strSql.append("symbol, ");
-            strSql.append("end_time, ");
+            strSql.append("start_time, ");
             strSql.append("end_time, ");
             strSql.append("break_time, ");
             strSql.append("updater_employee_id, ");
