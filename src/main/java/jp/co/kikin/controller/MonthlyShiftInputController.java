@@ -242,7 +242,7 @@ public class MonthlyShiftInputController {
         // 日曜日
         String sunday   = DayOfWeek.SUNDAY.getWeekdayShort();
 
-        model.addAttribute("satuuuurday", saturday);
+        model.addAttribute("saturday", saturday);
         model.addAttribute("sunday", sunday);
         model.addAttribute("monthlyShiftInputForm", form);
         model.addAttribute("shiftCmbMap", shiftCmbMap);
