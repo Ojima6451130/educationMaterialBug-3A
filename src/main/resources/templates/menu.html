@@ -37,7 +37,9 @@
       <div th:if="${authority_id == adminAuthority}" style="margin: auto;">
 
           <div class="menuBlock">
-            
+            <form action="/kikin/monthlyShiftCheck">
+              <input type="submit" value="月別シフト確認" class="bigButton" />
+            </form>
             <form action="/kikin/dailyShift" method="post">
               <input type="submit" value="日別シフト確認" class="bigButton" />
             </form>
