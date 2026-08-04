@@ -13,7 +13,7 @@
  */
 function checkHalfWidthKana(str) {
 
-    if (str.match(/^[\uFF61-\uFF9F]*$/)) {
+    if (str.match(/^[\uFF61-\uFF9F]+$/)) {
         return true;
     }
 
