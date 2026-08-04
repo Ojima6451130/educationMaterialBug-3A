@@ -138,7 +138,6 @@ public class WorkDateRequestDao extends Dao{
             strSql.append("ORDER BY ");
             strSql.append("employee_id,");
             strSql.append("year_month_day");
-            strSql.append(" limit 3");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
