@@ -51,7 +51,8 @@ public class EmployeeMstMntLogic {
 
                 if (deleteFlg) {
                     // 削除
-                    employeeMstMntDao.updateEmployeeMst(employeeMstMntDto, loginUserDto);
+                	String employeeId = employeeMstMntDto.getEmployeeId();
+                    employeeMstMntDao.deleteEmployeeMst(employeeId);
                 } else {
                     // 更新
                     employeeMstMntDao.updateEmployeeMst(employeeMstMntDto, loginUserDto);
