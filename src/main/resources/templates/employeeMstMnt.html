@@ -46,14 +46,20 @@
 
             // パスワードエラーメッセージ
             var passwordErrorMsg = '';
+            //社員名エラーメッセージ
+            var employeeNameErrorMsg = '';
             // 社員名カナエラーメッセージ
-            var employeeNameKanaErrorMsg = '';
+            var employeeNameKanaErrorMsg000001 = '';
+            var employeeNameKanaErrorMsg000003 = '';
+            
             var errorMsg = '';
 
             with (document.forms['mntform'].elements) {
                 for (var i = 0; i < listSize; i++) {
                     // パスワードを取得する。
                     var password = document.getElementById('password_' + i + '_value').value;
+                    //社員名を取得する
+                    var employeeName = document.getElementById('employeeName_' + i).value;
                     // 社員名カナを取得する。
                     var employeeNameKana = document.getElementById('employeeNameKana_' + i).value;
 
@@ -69,23 +75,36 @@
                             document.getElementById('password_' + i).style.backgroundColor = 'red';
                         }
                     }
-                    // 社員名カナチェック
+                 // 社員名チェック
+                    if (!passwordErrorMsg) {
+                        if (!checkRequired(password)) {
+                            var strArr = ['社員名'];
+                            employeeNameErrorMsg = getMessage('E-MSG-000001', strArr);
+                            document.getElementById('password_' + i).style.backgroundColor = 'red';
+                        }
+                    }
+                 // 社員名カナチェック000001
+                    if (!passwordErrorMsg) {
+                        if (!checkRequired(password)) {
+                            var strArr = ['社員名カナ'];
+                            employeeNameKanaErrorMsg000001 = getMessage('E-MSG-000001', strArr);
+                            document.getElementById('password_' + i).style.backgroundColor = 'red';
+                        }
+                    }
+                    // 社員名カナチェック000003
                     if (!employeeNameKanaErrorMsg) {
                         if (!checkHalfWidthKana(employeeNameKana)) {
                             var strArr = ['社員名カナ'];
-                            employeeNameKanaErrorMsg = getMessage('E-MSG-000003', strArr);
+                            employeeNameKanaErrorMsg000003 = getMessage('E-MSG-000003', strArr);
                             document.getElementById('employeeNameKana_' + i).style.backgroundColor = 'red';
                         }
                     }
 
-                    if (passwordErrorMsg && employeeNameKanaErrorMsg) {
-                        // パスワード 、社員名カナが共にエラーの場合
-                        break;
-                    }
+                    
                 }
             }
             // エラーメッセージ
-            errorMsg = passwordErrorMsg + employeeNameKanaErrorMsg;
+            errorMsg = passwordErrorMsg + employeeNameErrorMsg + employeeNameKanaErrorMsg000001 + employeeNameKanaErrorMsg000003;
 
             if (errorMsg) {
                 alert(errorMsg);
@@ -167,10 +186,10 @@
                                     </td>
 
                                     <td style="width: 200px; text-align: center;">
-                                        <input type="text"
+                                        <input type="hidden"
                                             th:value="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
                                             size="10" th:id="'password_' + ${itemStat.index}" maxlength="6" />
-                                        <input type="hidden"
+                                        <input type="text"
                                             th:field="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
                                             size="10" th:id="'password_' + ${itemStat.index} + '_value'"
                                             maxlength="6" />
@@ -190,7 +209,7 @@
 
                                     <td style="width: 100px; text-align: center;">
                                         <select th:field="*{employeeMstMntBeanList[__${itemStat.index}__].AuthorityId}"
-                                            style="width: 100%; text-align: center; " disabled="disabled">
+                                            style="width: 100%; text-align: center; ">
                                             <option value="01" th:selected="${item.AuthorityId == '01'}">管理者</option>
                                             <option value="02" th:selected="${item.AuthorityId == '02'}">一般</option>
                                         </select>
@@ -217,14 +236,14 @@
                             <td id="footRight">
                                 <input value="新規登録" name="button" type="button" class="smallButton"
                                     onclick="location.href='/kikin/employeeMstMnt/regist'" />
-                                <input value="更新" name="button" type="button" class="smallButton"
+                                <input value="更新" name="button" type="submit" class="smallButton"
                                     onclick="employeeMstMntUpdate()" />
                             </td>
                         </tr>
                     </table>
                 </div>
-        </div>
         </form>
+        </div>
     </div>
 </body>
 

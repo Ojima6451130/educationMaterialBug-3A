@@ -23,6 +23,8 @@
 		with (document.forms['registForm']) {
 			// パスワード
 			var passwordVar = password.value;
+			// 社員
+			var employeeNameVar = employeeName.value;
 			// 社員名カナ
 			var employeeNameKanaVar = employeeNameKana.value;
 
@@ -34,6 +36,20 @@
 			if (!checkRequired(passwordVar)) {
 				// エラー有り
 				var strArr = [ 'パスワード' ];
+				errorMsg += getMessage('E-MSG-000001', strArr);
+				password.style.backgroundColor = 'red';
+			}
+			// 社員名
+			if (!checkRequired(employeeNameVar)) {
+				// エラー有り
+				var strArr = [ '社員名' ];
+				errorMsg += getMessage('E-MSG-000001', strArr);
+				password.style.backgroundColor = 'red';
+			}
+			// 社員名カナ
+			if (!checkRequired(employeeNameKanaVar)) {
+				// エラー有り
+				var strArr = [ '社員名カナ' ];
 				errorMsg += getMessage('E-MSG-000001', strArr);
 				password.style.backgroundColor = 'red';
 			}

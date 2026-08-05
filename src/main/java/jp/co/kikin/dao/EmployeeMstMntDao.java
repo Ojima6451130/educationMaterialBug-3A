@@ -162,6 +162,7 @@ public class EmployeeMstMntDao extends Dao {
             StringBuffer strSql = new StringBuffer();
             strSql.append("UPDATE ");
             strSql.append("m_employee ");
+            strSql.append("SET ");
             strSql.append("password = ?, ");
             strSql.append("employee_name = ?, ");
             strSql.append("employee_name_kana = ?, ");
