@@ -202,7 +202,7 @@ public class MonthlyShiftLogic {
         String yearMonth = "";
 
         int listSize = dateBeanList.size();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 31; i++) {
             DateBean dateBean = null;
 
             if (i < listSize) {
