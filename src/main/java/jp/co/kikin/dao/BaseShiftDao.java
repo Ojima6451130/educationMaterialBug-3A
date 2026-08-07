@@ -117,11 +117,18 @@ public class BaseShiftDao extends Dao {
         try {
             StringBuffer strSql = new StringBuffer();
             strSql.append("SELECT           ");
-            strSql.append("    1            ");
+            strSql.append("    ?            ");
             strSql.append("FROM             ");
             strSql.append("    m_base_shift ");
             strSql.append("WHERE            ");
-            
+            strSql.append("    	monday      ");
+            strSql.append("    	tuesday     ");
+            strSql.append("    wednesday    ");
+            strSql.append("    thursday     ");
+            strSql.append("    friday       ");
+            strSql.append("    saturday     ");
+            strSql.append("    sunday       ");
+            strSql.append("    IS NOT NULL  ");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
