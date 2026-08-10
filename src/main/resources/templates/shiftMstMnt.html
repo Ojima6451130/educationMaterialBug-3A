@@ -193,6 +193,9 @@
               <td style="width: 70px; box-sizing: border-box;text-overflow: clip; text-align: center;">
                 <input type="checkbox" th:field="*{shiftMstMntBeanList[__${itemStat.index}__].deleteFlg}"/>
               </td>
+              
+                <input type="hidden" th:field="*{shiftMstMntBeanList[__${itemStat.index}__].shiftId}"/>
+
             </tr>
           </tbody>
         </table>

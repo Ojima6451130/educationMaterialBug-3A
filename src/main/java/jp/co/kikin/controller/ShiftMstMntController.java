@@ -7,6 +7,7 @@
  */
 package jp.co.kikin.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -159,7 +160,7 @@ public class ShiftMstMntController {
 
         // 更新後のフォームをリダイレクト先に渡す
         redirectAttributes.addFlashAttribute("shiftMstMntForm", form);
-        return "shiftMstMnt";
+        return REDIRECT;
     }
 
 
