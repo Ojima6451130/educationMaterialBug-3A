@@ -73,7 +73,7 @@ public class ShiftMstMntDao extends Dao {
                 ShiftMstMntDto shiftMstMntDto = new ShiftMstMntDto();
                 shiftMstMntDto.setShiftId(rs.getString(M_shift.SHIFT_ID.getName())); // シフトID
                 shiftMstMntDto.setShiftName(rs.getString(M_shift.SHIFT_NAME.getName())); // パスワード
-                shiftMstMntDto.setSymbol(CommonUtils.changeNullToBlank(rs.getString(M_shift.SHIFT_NAME.getName()))); // シンボル
+                shiftMstMntDto.setSymbol(CommonUtils.changeNullToBlank(rs.getString(M_shift.SYMBOL.getName()))); // シンボル
                 shiftMstMntDto.setStartTime(rs.getString(M_shift.START_TIME.getName())); // 開始時間
                 shiftMstMntDto.setEndTime(rs.getString(M_shift.END_TIME.getName())); // 終了時間
                 shiftMstMntDto.setBreakTime(rs.getString(M_shift.BREAK_TIME.getName())); // 休憩時間
@@ -187,7 +187,7 @@ public class ShiftMstMntDao extends Dao {
             strSql.append("DELETE FROM ");
             strSql.append("m_shift ");
             strSql.append("WHERE ");
-           
+            strSql.append("shift_id = ? ");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
