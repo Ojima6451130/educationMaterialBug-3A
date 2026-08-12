@@ -26,7 +26,7 @@ public class BaseShiftPatternBean {
 		return shiftName;
 	}
 	public void setShiftName(String shiftName) {
-		this.symbol = shiftName;
+		this.shiftName = shiftName;
 	}
 	public String getSymbol() {
 		return symbol;
