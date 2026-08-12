@@ -9,8 +9,9 @@ package jp.co.kikin.model;
 import java.util.List;
 import java.util.Map;
 
-
+import jp.co.kikin.constant.CommonConstant;
 import jp.co.kikin.model.DateBean;
+import jp.co.kikin.service.CommonUtils;
 import lombok.Data;
 
 /**
@@ -26,7 +27,7 @@ public class MonthlyShiftInputForm{
     /** 日付リスト */
     private List<DateBean> dateBeanList;
     /** 年月 */
-    private String yearMonth = "";
+    private String yearMonth = CommonUtils.getFisicalDay(CommonConstant.YEARMONTH);;
     /** シフトコンボ */
     private Map<String, String> shiftCmbMap;
     /** 年月コンボ */
