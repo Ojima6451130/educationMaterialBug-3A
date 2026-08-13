@@ -67,37 +67,37 @@
                 <td class="tableBody" style="width: 150px; text-align: center;">
                   <span th:value="${workDateRequestCheck.employeeName}">[[${workDateRequestCheck.employeeName}]]</span>
                 </td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol01}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol02}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol03}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol04}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol05}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol06}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol07}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol08}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol09}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol10}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol11}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol12}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol13}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol14}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol15}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol16}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol17}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol18}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol19}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol20}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol21}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol22}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol23}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol24}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol25}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol26}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol27}"></td>
-                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol28}"></td>
-                <td th:if="${datebeanList.size() > 28}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol29}"></td>
-                <td th:if="${datebeanList.size() > 29}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol30}"></td>
-                <td th:if="${datebeanList.size() > 30}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol31}"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol01 != null && workDateRequestCheck.symbol01 != ''} ? ${workDateRequestCheck.symbol01} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol02 != null && workDateRequestCheck.symbol02 != ''} ? ${workDateRequestCheck.symbol02} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol03 != null && workDateRequestCheck.symbol03 != ''} ? ${workDateRequestCheck.symbol03} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol04 != null && workDateRequestCheck.symbol04 != ''} ? ${workDateRequestCheck.symbol04} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol05 != null && workDateRequestCheck.symbol05 != ''} ? ${workDateRequestCheck.symbol05} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol06 != null && workDateRequestCheck.symbol06 != ''} ? ${workDateRequestCheck.symbol06} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol07 != null && workDateRequestCheck.symbol07 != ''} ? ${workDateRequestCheck.symbol07} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol08 != null && workDateRequestCheck.symbol08 != ''} ? ${workDateRequestCheck.symbol08} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol09 != null && workDateRequestCheck.symbol09 != ''} ? ${workDateRequestCheck.symbol09} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol10 != null && workDateRequestCheck.symbol10 != ''} ? ${workDateRequestCheck.symbol10} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol11 != null && workDateRequestCheck.symbol11 != ''} ? ${workDateRequestCheck.symbol11} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol12 != null && workDateRequestCheck.symbol12 != ''} ? ${workDateRequestCheck.symbol12} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol13 != null && workDateRequestCheck.symbol13 != ''} ? ${workDateRequestCheck.symbol13} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol14 != null && workDateRequestCheck.symbol14 != ''} ? ${workDateRequestCheck.symbol14} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol15 != null && workDateRequestCheck.symbol15 != ''} ? ${workDateRequestCheck.symbol15} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol16 != null && workDateRequestCheck.symbol16 != ''} ? ${workDateRequestCheck.symbol16} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol17 != null && workDateRequestCheck.symbol17 != ''} ? ${workDateRequestCheck.symbol17} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol18 != null && workDateRequestCheck.symbol18 != ''} ? ${workDateRequestCheck.symbol18} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol19 != null && workDateRequestCheck.symbol19 != ''} ? ${workDateRequestCheck.symbol19} : '-'">} ?: '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol20 != null && workDateRequestCheck.symbol20 != ''} ? ${workDateRequestCheck.symbol20} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol21 != null && workDateRequestCheck.symbol21 != ''} ? ${workDateRequestCheck.symbol21} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol22 != null && workDateRequestCheck.symbol22 != ''} ? ${workDateRequestCheck.symbol22} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol23 != null && workDateRequestCheck.symbol23 != ''} ? ${workDateRequestCheck.symbol23} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol24 != null && workDateRequestCheck.symbol24 != ''} ? ${workDateRequestCheck.symbol24} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol25 != null && workDateRequestCheck.symbol25 != ''} ? ${workDateRequestCheck.symbol25} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol26 != null && workDateRequestCheck.symbol26 != ''} ? ${workDateRequestCheck.symbol26} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol27 != null && workDateRequestCheck.symbol27 != ''} ? ${workDateRequestCheck.symbol27} : '-'"></td>
+                <td class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol28 != null && workDateRequestCheck.symbol28 != ''} ? ${workDateRequestCheck.symbol28} : '-'"></td>
+                <td th:if="${datebeanList.size() > 28}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol29 != null && workDateRequestCheck.symbol29 != ''} ? ${workDateRequestCheck.symbol29} : '-'"></td>
+                <td th:if="${datebeanList.size() > 29}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol30 != null && workDateRequestCheck.symbol30 != ''} ? ${workDateRequestCheck.symbol30} : '-'"></td>
+                <td th:if="${datebeanList.size() > 30}" class="tableBody" style="width: 40px; text-align: center;" th:text="${workDateRequestCheck.symbol31 != null && workDateRequestCheck.symbol31 != ''} ? ${workDateRequestCheck.symbol31} : '-'"></td>
               </tr>
             </tbody>
           </table>
