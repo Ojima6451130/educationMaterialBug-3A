@@ -449,7 +449,7 @@ public class WorkRecordDao extends Dao {
 			ps.setString(5, workRecordDto.getBreakTime());
 			ps.setString(6, workRecordDto.getActualWorkTime());
 			ps.setString(7, workRecordDto.getOverTime());
-			ps.setString(8, workRecordDto.getActualWorkTime());
+			ps.setString(8, workRecordDto.getHolidayTime());
 			ps.setString(9, workRecordDto.getRemark());
 			ps.setString(10, employeeId);
 			ps.setString(11, employeeId);
