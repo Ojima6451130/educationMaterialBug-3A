@@ -123,7 +123,7 @@ public class WorkDateRequestInputController extends WorkDateRequestAbstractContr
             dateBeanList = CommonUtils.getDateBeanList(yearMonth);
             yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 0, 1, false);
             yearMonthSet.addAll(yearMonthCmbMap.values());
-            yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 2, 0, false);
+            yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 2, 1, false);
             yearMonthSet.addAll(yearMonthCmbMap.values());
             yearMonthValues = new ArrayList<>(yearMonthSet);
             yearMonthValues.sort(Comparator.naturalOrder());
@@ -138,7 +138,8 @@ public class WorkDateRequestInputController extends WorkDateRequestAbstractContr
             dateBeanList = CommonUtils.getDateBeanList(yearMonth);
             yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 2, 1, false);
             yearMonthSet.addAll(yearMonthCmbMap.values());
-            yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 2, 0, false);
+            //↓No.98を修正するためにコメントアウトしました
+            //yearMonthCmbMap = comboListUtils.getComboYearMonth(yearMonth, 2, 0, false);
             yearMonthSet.addAll(yearMonthCmbMap.values());
             yearMonthValues = new ArrayList<>(yearMonthSet);
             yearMonthValues.sort(Comparator.naturalOrder());
