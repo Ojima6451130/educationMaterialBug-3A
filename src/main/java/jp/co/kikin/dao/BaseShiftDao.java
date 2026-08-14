@@ -169,7 +169,7 @@ public class BaseShiftDao extends Dao {
             strSql.append("     ,saturday        = ? ");
             strSql.append("     ,sunday          = ? ");
             strSql.append("     ,updater_employee_id = ? ");
-            strSql.append("     ,update_datetime       = CURRENT_DATE ");
+            strSql.append("     ,update_datetime       = CURRENT_TIMESTAMP ");
             strSql.append(" WHERE ");
             strSql.append("     employee_id   = ? ");
 
