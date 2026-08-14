@@ -400,7 +400,7 @@ public class CommonUtils {
         // 年
         int intYear = Integer.parseInt(yearMonth.substring(0, 4));
         // 月
-        int intMonth = Integer.parseInt(yearMonth.substring(4, 6)) - 1;
+        int intMonth = Integer.parseInt(yearMonth.substring(4, 6));
         // 日
         final int DAY = 1;
 
@@ -459,9 +459,9 @@ public class CommonUtils {
             }
 
             String yearMonthDay = yearMonth.concat(strDay);
-            dateBean.setPublicHolidayFlg(publicHolidaySet.contains(yearMonthDay));
             dateBean.setYearMonthDay(yearMonthDay);
             dateBean.setWeekDay(dayOfWeek.toString());
+            dateBean.setPublicHolidayFlg(publicHolidaySet.contains(yearMonthDay));
 
             dateBeanList.add(dateBean);
         }
