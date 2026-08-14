@@ -55,7 +55,7 @@ public class WorkRecordDao extends Dao {
 			strSql.append("SELECT ");
 			strSql.append("    shift.employee_id         AS employee_id, ");
 			strSql.append("    shift.shift_id         AS shift_id, ");
-			strSql.append("    shift.shift_name           AS symbol, ");
+			strSql.append("    shift.symbol            AS symbol, ");
 			strSql.append("    shift.start_time_shift AS start_time_shift, ");
 			strSql.append("    shift.end_time_shift   AS end_time_shift,  ");
 			strSql.append("    shift.break_time_shift AS break_time_shift, ");
@@ -97,7 +97,7 @@ public class WorkRecordDao extends Dao {
 			strSql.append("        ts.employee_id, ");
 			strSql.append("        ts.year_month_day AS work_day, ");
 			strSql.append("        ms.shift_id AS shift_id, ");
-			strSql.append("        ms.shift_name, ");
+			strSql.append("        ms.symbol, ");
 			strSql.append("        ms.start_time AS start_time_shift, ");
 			strSql.append("        ms.end_time AS end_time_shift, ");
 			strSql.append("        ms.break_time AS break_time_shift ");
@@ -449,7 +449,7 @@ public class WorkRecordDao extends Dao {
 			ps.setString(5, workRecordDto.getBreakTime());
 			ps.setString(6, workRecordDto.getActualWorkTime());
 			ps.setString(7, workRecordDto.getOverTime());
-			ps.setString(8, workRecordDto.getActualWorkTime());
+			ps.setString(8, workRecordDto.getHolidayTime());
 			ps.setString(9, workRecordDto.getRemark());
 			ps.setString(10, employeeId);
 			ps.setString(11, employeeId);

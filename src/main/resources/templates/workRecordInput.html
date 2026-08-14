@@ -211,7 +211,7 @@
               </td>
             </tr>
           </thead>
-          <tbody class="tableBody" style="display: block; width: max-content; height: 400px;  scrollbar-gutter: stable;">
+          <tbody class="tableBody" style="display: block; width: max-content; height: 400px; overflow-y: scroll">
             <tr th:each="workRecordInput, iterStat : ${workRecordInputForm.workRecordInputList }" class="list">
               <td style="width: 70px; text-align: center; box-sizing: border-box;">
                 <span th:text="${workRecordInput.workDayDisp}">
@@ -222,7 +222,7 @@
               </td>
 
               <td style="width: 70px; text-align: center; box-sizing: border-box;">
-                <span th:text="${symbol}"></span>
+                <span th:text="${workRecordInput.symbol}"></span>
               </td>
               <td style="width: 100px; text-align: center; box-sizing: border-box;">
                 <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].startTime}"
@@ -243,7 +243,7 @@
                 <span th:text="${workRecordInput.overTime}"></span>
               </td>
               <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                
+                <span th:text="${workRecordInput.holidayTime}"></span>
               </td>
               <td style="width: 250px; text-align: center; box-sizing: border-box;">
                 <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].remark}"

@@ -75,9 +75,9 @@ public abstract class DailyShiftAbstractController {
     /** 24:00 */
     private final String TIME24 = "24:00";
     /** 出勤 */
-    private final String WORKHOURS = "退勤したい";
+    private final String WORKHOURS = "出勤";
     /** 休憩 */
-    private final String BREAKTIME = "もう帰りたい";
+    private final String BREAKTIME = "休憩";
 
     /**
      * DtoからFormへ変換する
