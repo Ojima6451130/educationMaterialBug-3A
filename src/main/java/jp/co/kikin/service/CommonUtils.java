@@ -400,7 +400,7 @@ public class CommonUtils {
         // 年
         int intYear = Integer.parseInt(yearMonth.substring(0, 4));
         // 月
-        int intMonth = Integer.parseInt(yearMonth.substring(4, 6));
+        int intMonth = Integer.parseInt(yearMonth.substring(4, 6))-1;
         // 日
         final int DAY = 1;
 
