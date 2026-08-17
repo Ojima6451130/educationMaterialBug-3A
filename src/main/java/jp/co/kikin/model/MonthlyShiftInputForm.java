@@ -27,7 +27,7 @@ public class MonthlyShiftInputForm{
     /** 日付リスト */
     private List<DateBean> dateBeanList;
     /** 年月 */
-    private String yearMonth = CommonUtils.getFisicalDay(CommonConstant.YEARMONTH);;
+    private String yearMonth = CommonUtils.getFisicalDay(CommonConstant.YEARMONTH);
     /** シフトコンボ */
     private Map<String, String> shiftCmbMap;
     /** 年月コンボ */
