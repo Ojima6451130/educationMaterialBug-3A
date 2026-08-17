@@ -158,14 +158,45 @@ public class MonthlyShiftDao extends Dao{
 
             StringBuffer strSql = new StringBuffer();
             
+            strSql.append("UPDATE t_shift SET ");
+            strSql.append("shift_id= ?, ");
+            strSql.append("creator_employee_id= ?, ");
+            strSql.append("creation_datetime= current_timestamp(), ");
+            strSql.append("updater_employee_id= ?, ");
+            strSql.append("update_datetime= current_timestamp() ");
+            strSql.append("WHERE  employee_id= ? ");
+            strSql.append("AND ");
+            strSql.append("year_month_day= ? ");
+            
+//            strSql.append("INSERT INTO ");
+//            strSql.append("t_shift ");
+//            strSql.append(" ( ");
+//            strSql.append("employee_id, ");
+//            strSql.append("year_month_day, ");
+//            strSql.append("shift_id, ");
+//            strSql.append("creator_employee_id, ");
+//            strSql.append("creation_datetime, ");
+//            strSql.append("updater_employee_id, ");
+//            strSql.append("update_datetime");
+//            strSql.append(") ");
+//            strSql.append("VALUES ");
+//            strSql.append(" ( ");
+//            strSql.append("? ");
+//            strSql.append(",? ");
+//            strSql.append(",? ");
+//            strSql.append(",? ");
+//            strSql.append(", current_timestamp()");
+//            strSql.append(",? ");
+//            strSql.append(", current_timestamp()");
+//            strSql.append(") ");
 
             PreparedStatement ps = connection.prepareStatement(strSql.toString());
 
-            ps.setString(1, monthlyShiftDto.getEmployeeId());
-            ps.setString(2, monthlyShiftDto.getYearMonthDay());
-            ps.setString(3, monthlyShiftDto.getShiftId());
+            ps.setString(1, monthlyShiftDto.getShiftId());
+            ps.setString(2, monthlyShiftDto.getEmployeeId());
+            ps.setString(3, loginUserDto.getEmployeeId());
             ps.setString(4, loginUserDto.getEmployeeId());
-            ps.setString(5, loginUserDto.getEmployeeId());
+            ps.setString(5, monthlyShiftDto.getYearMonthDay());
 
             // ログ出力
             log.info(ps);
@@ -200,6 +231,8 @@ public class MonthlyShiftDao extends Dao{
             strSql.append("update_datetime = current_timestamp() ");
             strSql.append("WHERE ");
             strSql.append("employee_id = ? ");
+            strSql.append("AND ");
+            strSql.append("year_month_day = ? ");
             
 
 
