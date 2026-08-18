@@ -182,7 +182,7 @@
 										type="hidden"
 										th:value="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
 										size="10" th:id="'password_' + ${itemStat.index}"
-										maxlength="6" /> <input type="password"
+										maxlength="6" /> <input type="text"
 										th:field="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
 										size="10" th:id="'password_' + ${itemStat.index} + '_value'"
 										maxlength="6" /></td>
@@ -224,7 +224,7 @@
 								type="button" class="smallButton"
 								onclick="location.href='/kikin/employeeMstMnt/regist'" /> <input
 								value="更新" name="button" type="submit" class="smallButton"
-								onclick="employeeMstMntUpdate()" /></td>
+								onclick="return employeeMstMntUpdate()" /></td>
 						</tr>
 					</table>
 				</div>
