@@ -11,6 +11,24 @@
 <script type="text/javascript" th:src="@{/js/message.js}"></script>
 <script type="text/javascript" th:src="@{/js/checkCommon.js}"></script>
 <script type="text/javascript">
+
+function passwordDisplay(checkbox) {
+    const parentTd = checkbox.closest('td');
+
+    const passwordInput = parentTd.querySelector('input[type="password"]');
+    const textInput = parentTd.querySelector('input[type="text"]');
+    
+    if (checkbox.checked) {
+        passwordInput.style.display = 'none';
+        textInput.style.display = 'inline-block';
+        textInput.focus();
+    } else {
+        textInput.style.display = 'none';
+        passwordInput.style.display = 'inline-block';
+    }
+}
+
+
 	/**
 	 * チェックボックスがチェックされたら true、されていなければ false
 	 * param index 対象行番号
@@ -59,8 +77,7 @@
 		with (document.forms['mntform'].elements) {
 			for (var i = 0; i < listSize; i++) {
 				// パスワードを取得する。
-				var password = document.getElementById('password_' + i
-						+ '_value').value;
+				var password = document.getElementById('password_' + i + '_value').value;
 				//社員名を取得する idと紐づけました
 				var employeeName = document.getElementById('employeeName_' + i).value;
 				// 社員名カナを取得する。
@@ -68,6 +85,7 @@
 						.getElementById('employeeNameKana_' + i).value;
 
 				// 背景色をクリアする
+				document.getElementById('password_' + i + '_value').style.backgroundColor = 'white';
 				document.getElementById('password_' + i).style.backgroundColor = 'white';
 				document.getElementById('employeeName_' + i).style.backgroundColor = 'white';
 				document.getElementById('employeeNameKana_' + i).style.backgroundColor = 'white';
@@ -77,6 +95,7 @@
 					if (!checkRequired(password)) {
 						var strArr = [ 'パスワード' ];
 						passwordErrorMsg = getMessage('E-MSG-000001', strArr);
+						document.getElementById('password_' + i + '_value').style.backgroundColor = 'red';
 						document.getElementById('password_' + i).style.backgroundColor = 'red';
 					}
 				}
@@ -178,14 +197,24 @@
 										th:field="*{employeeMstMntBeanList[__${itemStat.index}__].employeeId}"
 										size="20" readonly="true" /></td>
 
-									<td style="width: 200px; text-align: center;"><input
-										type="hidden"
+									<td style="width: 200px; text-align: center;">
+										<input type="password"
 										th:value="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
 										size="10" th:id="'password_' + ${itemStat.index}"
-										maxlength="6" /> <input type="text"
+										maxlength="6" 
+										readonly /> 
+										
+										<input type="text"
 										th:field="*{employeeMstMntBeanList[__${itemStat.index}__].password}"
 										size="10" th:id="'password_' + ${itemStat.index} + '_value'"
-										maxlength="6" /></td>
+										maxlength="6" 
+										style="display: none;" />
+										
+										<label th:for="'checkbox_' + ${itemStat.index}">
+											<input type="checkbox" th:id="'checkbox_' + ${itemStat.index}" onchange="passwordDisplay(this)">変更
+										</label>
+										
+										</td>
 
 									<td style="width: 200px; text-align: center;"><input
 										type="text"
