@@ -2,292 +2,362 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
-  <title>勤務実績入力画面</title>
-  <link rel="stylesheet" media="all" th:href="@{/css/common.css}" />
-  <script type="text/javascript" th:src="@{/js/common.js}"></script>
-  <script type="text/javascript" th:src="@{/js/message.js}"></script>
-  <script type="text/javascript" th:src="@{/js/checkCommon.js}"></script>
-  <script>
-
-    /**
-       * 登録へ
-       */
-    function register(event) {
-      if(event){
-        event.preventDefault();
-      }
-
-      // 一覧のサイズ
-      var row = document.querySelectorAll(".list")
-      var listSize = row.length;
-
-      // 開始時間エラーメッセージ
-      var startTimeErrMsg = '';
-      // 終了時間エラーメッセージ
-      var endTimeErrMsg = '';
-      // 休憩時間エラーメッセージ
-      var breakTimeErrMsg = '';
-      // From - To エラーメッセージ
-      var fromToErrMsg = '';
-      // エラーメッセージ
-      var errorMsg = '';
-
-
-      with (document.forms['registForm'].elements) {
-
-        for (var i = 0; i < listSize; i++) {
-
-          // 開始時間を取得する。
-          var startTimeInput  = document.querySelector('#WorkRecordInputList' + i + '\\.startTime');
-          var startTimeValue = startTimeInput.value;
-          // 終了時間を取得する。
-          var endTimeInput = document.querySelector('#WorkRecordInputList' + i + '\\.endTime');
-          var endTimeValue = endTimeInput.value;
-          // 休憩時間を取得する。
-          var breakTimeInput = document.querySelector('#WorkRecordInputList' + i + '\\.breakTime');
-          var breakTimeValue = breakTimeInput.value;
-
-          // 背景色をクリアする
-          startTimeInput.style.backgroundColor = 'white';
-          endTimeInput.style.backgroundColor = 'white';
-          breakTimeInput.style.backgroundColor = 'white';
-
-          if (startTimeValue  == "" && endTimeValue == "" && breakTimeValue == "") {
-            continue;
-          }
-
-          // 時間チェック
-          if (!startTimeErrMsg) {
-            if (!checkTime(startTimeValue)) {
-              var strArr = ['開始時間'];
-              startTimeErrMsg = getMessage('E-MSG-000004', strArr);
-              startTimeInput.style.backgroundColor = 'red';
-            }else{
-              startTimeInput.style.backgroundColor = 'white';
-            }
-          }
-          if (!endTimeErrMsg) {
-            if (!checkTime(endTimeValue)) {
-              var strArr = ['終了時間'];
-              endTimeErrMsg = getMessage('E-MSG-000004', strArr);
-              endTimeInput.style.backgroundColor = 'red';
-            }else{
-              endTimeInput.style.backgroundColor = 'white';
-            }
-          }
-          if (!breakTimeErrMsg) {
-            if (!checkTime(breakTimeValue)) {
-              var strArr = ['休憩時間'];
-              breakTimeErrMsg = getMessage('E-MSG-000004', strArr);
-              breakTimeInput.style.backgroundColor = 'red';
-            }else{
-              breakTimeInput.style.backgroundColor = 'white';
-            }
-          }
-
-          // from - to のチェック
-          if (!checkTimeCompare(startTimeValue, endTimeValue)) {
-            if (checkTime(startTimeValue) && checkTime(endTimeValue)) {
-              fromToErrMsg = getMessageCodeOnly('E-MSG-000005');
-              startTimeInput.style.backgroundColor = 'red';
-              endTimeInput.style.backgroundColor = 'red';
-            }
-          }
-
-        }
-      }
-
-      // エラーメッセージ
-      errorMsg = startTimeErrMsg + endTimeErrMsg + breakTimeErrMsg + fromToErrMsg;
-
-      if (errorMsg) {
-        alert(errorMsg);
-        // エラー
-        return false;
-      }
-
-      document.getElementById("registForm").submit();
-    }
-
-
-  </script>
-</head>
-
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
 <title>勤務実績入力画面</title>
+<link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/message.js}"></script>
+<script type="text/javascript" th:src="@{/js/checkCommon.js}"></script>
+<script>
+	/**
+	 * 登録へ
+	 */
+	function register(event) {
+		if (event) {
+			event.preventDefault();
+		}
+
+		// 一覧のサイズ
+		var row = document.querySelectorAll(".list");
+		var listSize = row.length;
+
+		// エラーメッセージ
+		var startTimeErrMsg = '';
+		var endTimeErrMsg = '';
+		var breakTimeErrMsg = '';
+		var fromToErrMsg = '';
+		var errorMsg = '';
+
+		with (document.forms['registForm'].elements) {
+
+			for (var i = 0; i < listSize; i++) {
+
+				// 開始時間を取得する。
+				var startTimeInput = document
+						.querySelector('#WorkRecordInputList' + i
+								+ '\\.startTime');
+				var startTimeValue = startTimeInput.value;
+				// 終了時間を取得する。
+				var endTimeInput = document
+						.querySelector('#WorkRecordInputList' + i
+								+ '\\.endTime');
+				var endTimeValue = endTimeInput.value;
+				// 休憩時間を取得する。
+				var breakTimeInput = document
+						.querySelector('#WorkRecordInputList' + i
+								+ '\\.breakTime');
+				var breakTimeValue = breakTimeInput.value;
+
+				// 背景色をクリアする
+				startTimeInput.style.backgroundColor = 'white';
+				endTimeInput.style.backgroundColor = 'white';
+				breakTimeInput.style.backgroundColor = 'white';
+
+				if (startTimeValue == "" && endTimeValue == ""
+						&& breakTimeValue == "") {
+					continue;
+				}
+
+				// 時間チェック
+				if (!startTimeErrMsg) {
+					if (!checkTime(startTimeValue)) {
+						var strArr = [ '開始時間' ];
+						startTimeErrMsg = getMessage('E-MSG-000004', strArr);
+						startTimeInput.style.backgroundColor = 'red';
+					} else {
+						startTimeInput.style.backgroundColor = 'white';
+					}
+				}
+				if (!endTimeErrMsg) {
+					if (!checkTime(endTimeValue)) {
+						var strArr = [ '終了時間' ];
+						endTimeErrMsg = getMessage('E-MSG-000004', strArr);
+						endTimeInput.style.backgroundColor = 'red';
+					} else {
+						endTimeInput.style.backgroundColor = 'white';
+					}
+				}
+				if (!breakTimeErrMsg) {
+					if (!checkTime(breakTimeValue)) {
+						var strArr = [ '休憩時間' ];
+						breakTimeErrMsg = getMessage('E-MSG-000004', strArr);
+						breakTimeInput.style.backgroundColor = 'red';
+					} else {
+						breakTimeInput.style.backgroundColor = 'white';
+					}
+				}
+
+				// from - to のチェック
+				if (!checkTimeCompare(startTimeValue, endTimeValue)) {
+					if (checkTime(startTimeValue) && checkTime(endTimeValue)) {
+						fromToErrMsg = getMessageCodeOnly('E-MSG-000005');
+						startTimeInput.style.backgroundColor = 'red';
+						endTimeInput.style.backgroundColor = 'red';
+					}
+				}
+
+			}
+		}
+
+		// エラーメッセージ
+		errorMsg = startTimeErrMsg + endTimeErrMsg + breakTimeErrMsg
+				+ fromToErrMsg;
+
+		if (errorMsg) {
+			alert(errorMsg);
+			return false;
+		}
+
+		document.getElementById("registForm").submit();
+	}
+</script>
 
 <style>
-  .weekday {
-    color: black;
-  }
+.weekday {
+	color: black;
+}
 
-  .saturday {
-    color: blue;
-  }
+.saturday {
+	color: blue;
+}
 
-  .sunday {
-    color: red;
-  }
+.sunday {
+	color: red;
+}
 
-  .holiday {
-    background-color: yellow;
-  }
+.holiday {
+	background-color: yellow;
+}
+
+/* 検索バーと社員情報のレイアウト調整 */
+.searchContainer {
+	width: 100%;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 </style>
-
+</head>
 
 <body>
-  <div id="wrapper">
-    <div id="header">
-      <table class="centered-container">
-        <tr>
-          <td id="headLeft">
-            <form action="/kikin/menu" method="post">
-              <input value="戻る" type="submit" class="smallButton" />
-            </form>
-          </td>
-          <td id="headCenter">
-            勤務実績入力
-          </td>
-          <td id="headRight">
-            <input value="ログアウト" type="button" class="smallButton" onclick="logout()" />
-          </td>
-        </tr>
-      </table>
-    </div>
+	<div id="wrapper">
+		<!-- ヘッダー -->
+		<div id="header">
+			<table class="full-width">
+				<tr>
+					<td id="headLeft">
+						<form action="/kikin/menu" method="post">
+							<input value="戻る" type="submit" class="smallButton" />
+						</form>
+					</td>
+					<td id="headCenter">勤務実績入力</td>
+					<td id="headRight"><input value="ログアウト" type="button"
+						class="smallButton" onclick="logout()" /></td>
+				</tr>
+			</table>
+		</div>
 
-    <div id="businessBody">
-      <form action="/kikin/workRecordInput/search" method="post" th:object="${workRecordInputForm}">
-        <label>表示年月：</label>
-        <select name="yearMonth" id="yearMonth">
-          <!-- yearMonthValues リストをループして表示 -->
-          <option th:each="entry : ${yearMonthCmbMap.entrySet()}" th:text="${entry.value}" th:value="${entry.key}"
-            th:selected="${entry.key == workRecordInputForm.yearMonth}" th:inline="text">[[${yearMonth}]>
-          </option>
-        </select>
-        <input value="検索" type="submit"/>
-        <div style="float: right; width: 300px; text-align: center; box-sizing: border-box;">
-          社員ID&nbsp;<span th:text="${loginUserDto.employeeId}"></span>
-          ：社員名&nbsp;<span th:text="${loginUserDto.employeeName}"></span>
-        </div>
-      </form>
-    </div>
+		<!-- メインコンテンツ -->
+		<div id="businessBody">
+			<div style="width: fit-content; margin: 0 auto;">
 
-    <div id="businessBody" style="justify-content: center;">
-      <form action="/kikin/workRecordInput/regist" id="registForm" method="post" th:object="${workRecordInputForm}">
-        <table class="overflowFixed">
-          <thead class="tableHeader" style="display: block; position: sticky; top: 0; width: max-content;">
-            <tr>
-              <td style="width: 70px; text-align: center; box-sizing: border-box;">
-                日付
-              </td>
-              <td style="width: 50px; text-align: center; box-sizing: border-box;">
-                曜日
-              </td>
-              <td style="width: 70px; text-align: center; box-sizing: border-box;">
-                シフト
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                開始時刻
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                終了時刻
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                休憩
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                実働時間
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                時間外
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                休日
-              </td>
-              <td style="width: 250px; text-align: center; box-sizing: border-box;">
-                備考
-              </td>
-            </tr>
-          </thead>
-          <tbody class="tableBody" style="display: block; width: max-content; height: 400px; overflow-y: scroll">
-            <tr th:each="workRecordInput, iterStat : ${workRecordInputForm.workRecordInputList }" class="list">
-              <td style="width: 70px; text-align: center; box-sizing: border-box;">
-                <span th:text="${workRecordInput.workDayDisp}">
-                </span>
-              </td>
-              <td style="width: 50px; text-align: center; box-sizing: border-box;"
-                th:class="${workRecordInput.weekDay == '土' ? 'fontBlue' : (workRecordInput.weekDay == '日' or workRecordInput.publicHolidayFlg) ? 'fontRed' : 'fontBlack'}">
-                <span th:text="${workRecordInput.weekDay}"></span>
-              </td>
+				<!-- 検索・社員情報エリア -->
+				<div class="searchContainer">
+					<form action="/kikin/workRecordInput/search" method="post"
+						th:object="${workRecordInputForm}" style="margin: 0;">
+						<label>表示年月：</label> <select name="yearMonth" id="yearMonth">
+							<option th:each="entry : ${yearMonthCmbMap.entrySet()}"
+								th:text="${entry.value}" th:value="${entry.key}"
+								th:selected="${entry.key == workRecordInputForm.yearMonth}">
+							</option>
+						</select> <input value="検索" type="submit" class="smallButton"
+							style="width: 60px; height: 26px;" />
+					</form>
 
-              <td style="width: 70px; text-align: center; box-sizing: border-box;">
-                <span th:text="${workRecordInput.symbol}"></span>
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].startTime}"
-                  style="width: 90px;" />
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].endTime}"
-                  style="width: 90px;" />
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].breakTime}"
-                  style="width: 90px;" />
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <span th:text="${workRecordInput.actualWorkTime}"></span>
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <span th:text="${workRecordInput.overTime}"></span>
-              </td>
-              <td style="width: 100px; text-align: center; box-sizing: border-box;">
-                <span th:text="${workRecordInput.holidayTime}"></span>
-              </td>
-              <td style="width: 250px; text-align: center; box-sizing: border-box;">
-                <input type="text" th:field="*{WorkRecordInputList[__${iterStat.index}__].remark}"
-                  style="width: 240px;" />
-              </td>
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].workDay}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].employeeId}" />
+					<div style="text-align: right; font-weight: bold;">
+						社員ID：<span th:text="${loginUserDto.employeeId}"></span>
+						&nbsp;&nbsp; 社員名：<span th:text="${loginUserDto.employeeName}"></span>
+					</div>
+				</div>
 
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].workDayDisp}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].weekDay}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].symbol}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].actualWorkTime}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].overTime}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].holidayTime}" />
-              
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].shiftId}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].startTimeShift}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].endTimeShift}" />
-              <input type="hidden" th:field="*{WorkRecordInputList[__${iterStat.index}__].breakTimeShift}" />
-            </tr>
-          </tbody>
-        </table>
-        </form>
-      </div>
+				<!-- 入力テーブルエリア -->
+				<form action="/kikin/workRecordInput/regist" id="registForm"
+					method="post" th:object="${workRecordInputForm}">
+					<table class="daysTable">
+						<thead class="tableHeader"
+							style="display: block; position: sticky; top: 0; width: max-content;">
+							<tr>
+								<td
+									style="width: 70px; text-align: center; box-sizing: border-box;">日付</td>
+								<td
+									style="width: 50px; text-align: center; box-sizing: border-box;">曜日</td>
+								<td
+									style="width: 70px; text-align: center; box-sizing: border-box;">シフト</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">開始時刻</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">終了時刻</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">休憩</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">実働時間</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">時間外</td>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">休日</td>
+								<td
+									style="width: 250px; text-align: center; box-sizing: border-box;">備考</td>
+							</tr>
+						</thead>
+						<tbody class="tableBody"
+							style="display: block; width: max-content; height: 420px; overflow-y: scroll;">
+							<tr
+								th:each="workRecordInput, iterStat : ${workRecordInputForm.workRecordInputList}"
+								class="list">
+								<td
+									style="width: 70px; text-align: center; box-sizing: border-box;">
+									<span th:text="${workRecordInput.workDayDisp}"></span> <!-- 日付・社員ID関連のhidden -->
+									<input type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].workDay}" />
+									<input type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].employeeId}" />
+									<input type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].workDayDisp}" />
+								</td>
 
-      <div id="footer">
-        <table>
-          <tr>
-            <td id="footLeft">
+								<td
+									style="width: 50px; text-align: center; box-sizing: border-box;"
+									th:class="${workRecordInput.weekDay == '土' ? 'fontBlue' : (workRecordInput.weekDay == '日' or workRecordInput.publicHolidayFlg) ? 'fontRed' : 'fontBlack'}">
+									<span th:text="${workRecordInput.weekDay}"></span> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].weekDay}" />
+								</td>
 
-            </td>
-            <td id="footCenter">
+								<td
+									style="width: 70px; text-align: center; box-sizing: border-box;">
+									<span th:text="${workRecordInput.symbol}"></span> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].symbol}" />
+									<input type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].shiftId}" />
+								</td>
 
-            </td>
-            <td id="footRight">
-              <input value="登録" type="submit" form="registForm" class="smallButton" onclick="register(event)"/>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </div>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<input type="text"
+									th:field="*{workRecordInputList[__${iterStat.index}__].startTime}"
+									style="width: 85px; text-align: center;" /> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].startTimeShift}" />
+								</td>
 
-  </div>
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<input type="text"
+									th:field="*{workRecordInputList[__${iterStat.index}__].endTime}"
+									style="width: 85px; text-align: center;" /> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].endTimeShift}" />
+								</td>
+
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<input type="text"
+									th:field="*{workRecordInputList[__${iterStat.index}__].breakTime}"
+									style="width: 85px; text-align: center;" /> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].breakTimeShift}" />
+								</td>
+
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<span th:text="${workRecordInput.actualWorkTime}"></span> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].actualWorkTime}" />
+								</td>
+
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<span th:text="${workRecordInput.overTime}"></span> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].overTime}" />
+								</td>
+
+								<td
+									style="width: 100px; text-align: center; box-sizing: border-box;">
+									<span th:text="${workRecordInput.holidayTime}"></span> <input
+									type="hidden"
+									th:field="*{workRecordInputList[__${iterStat.index}__].holidayTime}" />
+								</td>
+
+								<td
+									style="width: 250px; text-align: center; box-sizing: border-box;">
+									<input type="text"
+									th:field="*{workRecordInputList[__${iterStat.index}__].remark}"
+									style="width: 230px;" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+
+<!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+
+		<!-- フッター -->
+		<div id="footer">
+			<table class="full-width">
+				<tr>
+					<td id="footLeft"></td>
+					<td id="footCenter"></td>
+					<td id="footRight" style="text-align: right;"><input
+						value="登録" type="button" class="smallButton"
+						onclick="register(event)" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </body>
 
 </html>

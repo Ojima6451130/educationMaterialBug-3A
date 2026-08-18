@@ -1,0 +1,402 @@
+@charset "UTF-8";
+
+body {
+	background-color: #FFFFFF;
+	overflow: hidden;
+	width: 100%;
+	margin: 0;
+	font-family: "メイリオ", Meiryo, sans-serif;
+}
+
+errorbody {
+	background-color: red;
+}
+
+#wrapper {
+	width: 100%;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+}
+
+/*
+* ヘッダー、フッター共通定義
+*/
+#header, #businessBody, #footer {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#header {
+	height: 55px;
+	background-color: #3D91B3;
+	color: white;
+}
+
+#header table {
+	width: 100%;
+	height: 100%;
+}
+
+#headLeft {
+	width: 15%;
+	text-align: center;
+}
+
+#headCenter {
+	font-size: 22px;
+	color: white;
+	width: 70%;
+	text-align: center;
+	font-weight: bold;
+}
+
+#headRight {
+	width: 15%;
+	text-align: center;
+}
+
+.smallButton, .longButton {
+	height: 32px;
+	border: none;
+	border-radius: 4px;
+	background-color: white;
+	color: #3D7FA0;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.smallButton {
+	width: 100px;
+}
+
+.longButton {
+	width: 110px;
+}
+
+.smallButton:hover, .longButton:hover {
+	background-color: #E8F5F8;
+}
+
+#businessBody {
+	height: calc(100vh - 125px);
+	overflow: auto;
+	background-color: #FFFFFF;
+	padding: 30px 50px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* 検索エリアの余白 */
+.searchForm {
+	margin-bottom: 20px;
+	font-weight: bold;
+	color: #333333;
+}
+
+.searchForm select {
+	padding: 3px 6px;
+	border: 1px solid #B1DCE5;
+	border-radius: 4px;
+}
+
+/* --- 勤務実績確認テーブルの罫線・カラー定義 --- */
+.overflowFixed {
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+}
+
+/* 全セル（td）に罫線を付与 */
+.overflowFixed td {
+	border: 1px solid #B1DCE5;
+	padding: 6px 4px;
+	box-sizing: border-box;
+}
+
+/* ヘッダー行の背景色と文字色 */
+.tableHeader td {
+	background-color: #E8F5F8;
+	color: #12689A;
+	font-weight: bold;
+}
+
+/* 曜日の文字色 */
+.fontBlue { color: #0000FF; }
+.fontRed { color: #FF0000; }
+.fontBlack { color: #000000; }
+.fontHeaderTitle { color: #12689A; } /* ← この行を追加（日にち・社員名の濃い青色） */
+
+.menuBlock {
+	margin: 15px;
+	float: left;
+	text-align: center;
+	padding: 0;
+	width: 260px;
+	min-height: 0;
+	background-color: transparent;
+}
+
+.menuContainer {
+	width: fit-content;
+	margin: 0 auto;
+	position: relative;
+	z-index: 10;
+}
+
+.bigButton {
+	display: block;
+	width: 240px;
+	height: 70px;
+	margin: 0 auto 15px auto;
+	background-color: #FFFFFF;
+	border: 2px solid #8CCEDC;
+	border-radius: 10px;
+	color: #12689A;
+	font-size: 17px;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+	transition: 0.2s;
+}
+
+.bigButton:hover {
+	background-color: #E8F5F8;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+}
+
+.bigButton:active {
+	transform: translateY(1px);
+}
+
+/* --- 3. 表（テーブル）の罫線とデザイン --- */
+.daysTable {
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+}
+
+.daysTable td {
+	border: 1px solid #B1DCE5;
+	padding: 4px 2px;
+	box-sizing: border-box;
+}
+
+/* ヘッダー行の背景色 */
+.daysTable thead tr.tableHeader td {
+	background-color: #E8F5F8;
+	font-weight: bold;
+}
+
+/* 日別シフトテーブル（追加分） */
+.dailyShiftTable, .tableHeaderDaily, .tableBodyDaily {
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+}
+
+/* 日別ヘッダーセル（「時間」「社員名」など） */
+.tableHeaderDaily td {
+	border: 1px solid #B1DCE5;
+	background-color: #E8F5F8;
+	font-weight: bold;
+	padding: 8px 4px;
+	box-sizing: border-box;
+}
+
+/* 日別ボディセル（シフト内容） */
+.tableBodyDaily td {
+	border: 1px solid #B1DCE5;
+	padding: 4px;
+	box-sizing: border-box;
+}
+
+/* --- 基本シフト登録テーブルの罫線定義 --- */
+.tableHeader, .tableBody {
+	border-collapse: collapse;
+}
+
+.tableHeader td, .tableBody td {
+	border: 1px solid #B1DCE5;
+	padding: 4px 2px;
+	box-sizing: border-box;
+}
+
+/* セレクトボックスをセル幅一杯に広げる設定 */
+.tableBody select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* フッターの背景色を透明に変更して川を見せる */
+#footer {
+	height: 70px;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+	position: relative;
+	z-index: 10;
+}
+
+#footer table {
+	width: 100%;
+}
+
+#footLeft {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#excelForm {
+	margin: 0;
+	display: inline-block;
+}
+
+/* --- 川と波なみのアニメーションCSS --- */
+.river {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 85px;
+	overflow: hidden;
+	background: transparent;
+	z-index: 0;
+	pointer-events: none; /* ボタン等のクリックを妨害しない */
+}
+
+/* SVG波形の共通基本設定 */
+.wave {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* 奥の波アニメーション */
+.wave-back use:nth-child(1) {
+	animation: moveWave 10s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.wave-back use:nth-child(2) {
+	animation: moveWave 7s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+/* 手前の波アニメーション */
+.wave-front use:nth-child(1) {
+	animation: moveWave 5s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.wave-front use:nth-child(2) {
+	animation: moveWave 3s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+@keyframes moveWave {
+	0% {
+		transform: translate3d(-90px, 0, 0);
+	}
+	100% {
+		transform: translate3d(85px, 0, 0);
+	}
+}
+
+/* 水面のギラつき・光 */
+.water-light {
+	position: absolute;
+	top: 15px;
+	left: -50%;
+	width: 200%;
+	height: 70px;
+	background: repeating-linear-gradient(
+		175deg,
+		transparent 0px,
+		transparent 20px,
+		rgba(255, 255, 255, 0.3) 22px,
+		transparent 25px,
+		transparent 50px
+	);
+	animation: waterLight 10s linear infinite;
+}
+
+@keyframes waterLight {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(20%);
+	}
+}
+
+/* どんぶらこ流れる桃 */
+.momo {
+	position: absolute;
+	left: -60px;
+	bottom: 12px;
+	font-size: 38px;
+	z-index: 5;
+	animation: momoMove 40s linear infinite, momoFloat 3s ease-in-out infinite;
+}
+
+@keyframes momoMove {
+	0% {
+		left: -60px;
+	}
+	100% {
+		left: 100%;
+	}
+}
+
+/* 桃が波に合わせて上下に揺れる */
+@keyframes momoFloat {
+	0% {
+		transform: translateY(0) rotate(-5deg);
+	}
+	50% {
+		transform: translateY(-8px) rotate(6deg);
+	}
+	100% {
+		transform: translateY(0) rotate(-5deg);
+	}
+}
+
+/* 桃の波紋 */
+.ripple {
+	position: absolute;
+	left: 50%;
+	bottom: 2px;
+	width: 24px;
+	height: 8px;
+	border: 2px solid rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	transform: translateX(-50%);
+	animation: ripple 2.5s ease-out infinite;
+}
+
+@keyframes ripple {
+	0% {
+		width: 20px;
+		opacity: 0.8;
+	}
+	100% {
+		width: 70px;
+		opacity: 0;
+	}
+}
+
+/* 基本シフト確認画面：2つのテーブルを左右並びにする設定 */
+.shift-tables-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; /* 左右の表の間の余白 */
+    width: 100%;
+}
+
+/* 非活性（disabled）セレクトボックスのテキスト色をくっきり見せる */
+.tableBody select:disabled {
+    color: #333333;
+    opacity: 1;
+    background-color: #FAFAFA;
+}

@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
 <title>基本シフトマスタメンテナンス入力画面</title>
-<link rel="stylesheet" media="all" th:href="@{/css/common.css}" />
+<link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
 <script type="text/javascript" th:src="@{/js/common.js}"></script>
 <script type="text/javascript" th:src="@{/js/message.js}"></script>
 </head>
@@ -161,6 +161,46 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+		
 		<div id="footer">
 			<table>
 				<tr>

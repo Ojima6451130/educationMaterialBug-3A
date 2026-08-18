@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
   <title>勤務実績確認画面</title>
-  <link rel="stylesheet" media="all" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
   <script type="text/javascript" th:src="@{/js/common.js}"></script>
   <script type="text/javascript" th:src="@{/js/message.js}"></script>
 </head>
@@ -32,6 +32,7 @@
 
 <body>
   <div id="wrapper">
+    <!-- ヘッダーエリア -->
     <div id="header">
       <table class="centered-container">
         <tr>
@@ -50,104 +51,123 @@
       </table>
     </div>
 
+    <!-- メインコンテンツエリア（全体を中央寄せ） -->
     <div id="businessBody">
-      <form action="/kikin/workRecordCheck/search" method="post" th:object="${workRecordInputForm}">
+      <!-- 検索フォームエリア -->
+      <form action="/kikin/workRecordCheck/search" method="post" th:object="${workRecordInputForm}" class="searchForm">
         <label>表示年月：</label>
         <select name="yearMonth" id="yearMonth">
-          <!-- yearMonthValues リストをループして表示 -->
           <option th:each="entry : ${yearMonthCmbMap.entrySet()}" th:text="${entry.value}" th:value="${entry.key}"
-            th:selected="${entry.key == workRecordInputForm.yearMonth}" th:inline="text">[[${yearMonth}]>
+            th:selected="${entry.key == workRecordInputForm.yearMonth}" th:inline="text">[[${yearMonth}]]
           </option>
         </select>
-        <div style="display: inline;">
-          社員名：
-          <select name="employeeId" id="employeeId">
-            <option th:each="entry : ${employeeCmbMap.entrySet()}" th:text="${entry.value}" th:value="${entry.key}"
-              th:selected="${entry.key == workRecordInputForm.employeeId}" th:inline="text">[[${entry.key}]>
-            </option>
-          </select>
-        </div>
-        <input value="検索" type="submit" />
+        
+        <label style="margin-left: 15px;">社員名：</label>
+        <select name="employeeId" id="employeeId">
+          <option th:each="entry : ${employeeCmbMap.entrySet()}" th:text="${entry.value}" th:value="${entry.key}"
+            th:selected="${entry.key == workRecordInputForm.employeeId}" th:inline="text">[[${entry.key}]]
+          </option>
+        </select>
+        
+        <input value="検索" type="submit" class="smallButton" style="margin-left: 10px;" />
       </form>
-    </div>
-    <br>
 
-    <div class="businessBody">
-      <table class="overflowFixed">
-        <thead class="tableHeader" style="display: block; position: sticky; top: 0; width: max-content;">
-          <tr>
-            <td style="width: 70px; text-align: center; box-sizing: border-box;">
-              日付
-            </td>
-            <td style="width: 50px; text-align: center; box-sizing: border-box;">
-              曜日
-            </td>
-            <td style="width: 70px; text-align: center; box-sizing: border-box;">
-              シフト
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              開始時刻
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              終了時刻
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              休憩
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              実働時間
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              時間外
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              休日
-            </td>
-            <td style="width: 250px; text-align: center; box-sizing: border-box;">
-              備考
-            </td>
-          </tr>  
-        </thead>
-        <tbody class="tableBody" style="display: block; width: max-content; height: 400px; overflow-y: scroll; scrollbar-gutter: stable;">
-          <tr th:each="workRecordCheck, iterStat : ${WorkRecordInputList}" class="list">
-            <td style="width: 70px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.workDayDisp}">
-            </td>
-            <td style="width: 50px; text-align: center; box-sizing: border-box;"
-              th:class="${workRecordCheck.weekDay == '土' ? 'fontBlue' : (workRecordCheck.weekDay == '日' or workRecordCheck.publicHolidayFlg) ? 'fontRed' : 'fontBlack'}">
-              <span th:text="${workRecordCheck.weekDay}"></span>
-            </td>
-
-            <td style="width: 70px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.symbol}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.startTime}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.endTime}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.breakTime}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.actualWorkTime}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.overTime}"></span>
-            </td>
-            <td style="width: 100px; text-align: center; box-sizing: border-box;">
-              <span th:text="${workRecordCheck.holidayTime}"></span>
-            </td>
-            <td style="width: 250px; text-align: center; box-sizing: border-box;">
-              <span type="text" th:text="${workRecordCheck.remark}"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- テーブルエリア -->
+      <div class="tableWrapper">
+        <table class="overflowFixed">
+          <thead class="tableHeader" style="display: block; position: sticky; top: 0; width: max-content;">
+            <tr>
+              <td style="width: 70px; text-align: center; box-sizing: border-box;">日付</td>
+              <td style="width: 50px; text-align: center; box-sizing: border-box;">曜日</td>
+              <td style="width: 70px; text-align: center; box-sizing: border-box;">シフト</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">開始時刻</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">終了時刻</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">休憩</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">実働時間</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">時間外</td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">休日</td>
+              <td style="width: 250px; text-align: center; box-sizing: border-box;">備考</td>
+            </tr>  
+          </thead>
+          <tbody class="tableBody" style="display: block; width: max-content; height: 400px; overflow-y: scroll; scrollbar-gutter: stable;">
+            <tr th:each="workRecordCheck, iterStat : ${WorkRecordInputList}" class="list">
+              <td style="width: 70px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.workDayDisp}"></span>
+              </td>
+              <td style="width: 50px; text-align: center; box-sizing: border-box;"
+                th:class="${workRecordCheck.weekDay == '土' ? 'fontBlue' : (workRecordCheck.weekDay == '日' or workRecordCheck.publicHolidayFlg) ? 'fontRed' : 'fontBlack'}">
+                <span th:text="${workRecordCheck.weekDay}"></span>
+              </td>
+              <td style="width: 70px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.symbol}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.startTime}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.endTime}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.breakTime}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.actualWorkTime}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.overTime}"></span>
+              </td>
+              <td style="width: 100px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.holidayTime}"></span>
+              </td>
+              <td style="width: 250px; text-align: center; box-sizing: border-box;">
+                <span th:text="${workRecordCheck.remark}"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  </div>
+  
+  <!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+  
 </body>
 
 </html>

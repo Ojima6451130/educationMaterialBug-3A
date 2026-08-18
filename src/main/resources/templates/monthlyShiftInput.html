@@ -13,296 +13,373 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
   <title>月別シフト入力画面</title>
-  <link rel="stylesheet" media="all" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
   <script type="text/javascript" th:src="@{/js/common.js}"></script>
   <script type="text/javascript" th:src="@{/js/message.js}"></script>
   <style>
+    /* テーブル部分のスクロールと余白調整 */
+    .table-container {
+      max-height: calc(100vh - 220px);
+      overflow-x: auto;
+      overflow-y: auto;
+      border: 1px solid #B1DCE5;
+      margin: 10px auto;
+      width: fit-content; /* 右側の余計な空白を無くす */
+      max-width: 100%;
+    }
+
+    .daysTable {
+      border-collapse: collapse;
+    }
+
+    .daysTable thead td {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    /* CSS詳細度の問題で色が上書きされない対策 */
+    .daysTable thead td.fontRed {
+      color: #FF0000 !important;
+    }
+    .daysTable thead td.fontBlue {
+      color: #0000FF !important;
+    }
+    .daysTable thead td.fontBlack {
+      color: #000000 !important;
+    }
+
+
+
     #resize select {
-    box-sizing: border-box;
-    width: 100%; /* ← 必要に応じて */
-  }
+      box-sizing: border-box;
+      width: 100%;
+    }
   </style>
 </head>
 
 <body>
   <div id="wrapper">
-    <div id="header">
-      <table class="centered-container">
-        <tr>
-          <td id="headLeft">
-            <form action="/kikin/menu" method="post">
-              <input value="戻る" type="submit" class="smallButton" />
-            </form>
-          </td>
-          <td id="headCenter">
-            月別シフト入力
-          </td>
-          <td id="headRight">
-            <input value="ログアウト" type="button" class="smallButton" onclick="logout()" />
-          </td>
-        </tr>
-      </table>
-    </div>
-    </div>
-      <form id="searchForm" action="/kikin/monthlyShiftInput/search" method="post" th:object="${monthlyShiftInputForm}">
-    <div align="center">
-        <label>表示年月：</label>
-        <select name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
-            <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
-        </select>
-        <button type="submit" value="search" >検索</button>
-        
-        
-    
-    <div id="businessBody">
-    
-      <table class="daysTable" id="resize">
-        <thead style="display: block; position: sticky;">
-          <tr class="tableHeader">
-            <td style="width: 150px; text-align: center;">
-              &nbsp;
-            </td>
-            <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center;">
-              <span th:text="${dateBeanStat.count}"></span>
-            </td>
-          </tr>
-          <tr class="tableHeader">
-            <td style="width: 150px; text-align: center; white-space: nowrap;">
-              社員名
-            </td>
-            <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center; vertical-align: middle;">
-              <span th:if="${dateBean.weekDay == saturday && !dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: blue;">[[${dateBean.weekDay}]]</span>
-              <span th:if="${dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: red;">[[${dateBean.weekDay}]]</span>
-              <span th:unless="${dateBean.weekDay == saturday || dateBean.weekDay == sunday || dateBean.publicHolidayFlg}"
-                        th:value="${dateBean.weekDay}" style="color: black;">[[${dateBean.weekDay}]]</span>
-            </td>
-          </tr>
-        </thead>
-        <tbody style="display: block; max-height: 400px; overflow-y: scroll;">
-          <tr th:each="monthlyShiftInput : ${monthlyShiftInputBean}" class="tableBody">
-            <td class="tableBody" style="width: 150px; text-align: center;">
-              <span th:text="${monthlyShiftInput.employeeName}"></span>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId01" name="shiftIdList[0]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId01} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId01}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId02" name="shiftIdList[1]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId02} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId02}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId03" name="shiftIdList[2]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId03} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId03}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId04" name="shiftIdList[3]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId04} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId04}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId05" name="shiftIdList[4]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId05} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId05}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId06" name="shiftIdList[5]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId06} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId06}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId07" name="shiftIdList[6]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId07} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId07}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId08" name="shiftIdList[7]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId08} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId08}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId09" name="shiftIdList[8]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId09} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId09}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId10" name="shiftIdList[9]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId10} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId10}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId11" name="shiftIdList[10]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId11} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId11}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId12" name="shiftIdList[11]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId12} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId12}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId13" name="shiftIdList[12]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId13} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId13}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId14" name="shiftIdList[13]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId14} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId14}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId15" name="shiftIdList[14]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId15} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId15}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId16" name="shiftIdList[15]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId16} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId16}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId17" name="shiftIdList[16]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId17} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId17}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId18" name="shiftIdList[17]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId18} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId18}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId19" name="shiftIdList[18]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId19} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId19}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId20" name="shiftIdList[19]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId20} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId20}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId21" name="shiftIdList[20]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId21} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId21}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId22" name="shiftIdList[21]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId22} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId22}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId23" name="shiftIdList[22]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId23} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId23}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId24" name="shiftIdList[23]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId24} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId24}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId25" name="shiftIdList[24]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId25} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId25}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId26" name="shiftIdList[25]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId26} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId26}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId27" name="shiftIdList[26]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId27} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId27}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;">
-              <select id="shiftId28" name="shiftIdList[27]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId28} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId28}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td th:if="${dateBeanList.size() > 28}" style="width: 40px; text-align: center;">
-              <select id="shiftId29" name="shiftIdList[28]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId29} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId29}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td th:if="${dateBeanList.size() > 29}" style="width: 40px; text-align: center;">
-              <select id="shiftId30" name="shiftIdList[29]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId30} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId30}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-            </td>
-            <td th:if="${dateBeanList.size() > 30}" style="width: 40px; text-align: center;">
-              <select id="shiftId31" name="shiftIdList[30]">
-                <option th:value="''" th:selected="${monthlyShiftInput.shiftId31} == ''" th:inline="text"></option>
-                <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId31}" th:inline="text">[[${shift.value}]]</option>
-              </select>
-          </tr>
-        </tbody>
-      </table>
-      </div>
+    <form id="searchForm" action="/kikin/monthlyShiftInput/search" method="post" th:object="${monthlyShiftInputForm}">
       
-    </div>
-    
-    
-    <div id="footer">
-      <table>
-        <tr>
-          <td id="footLeft">
-            <div style="margin-left:50px;white-space: nowrap;">
+      <!-- ヘッダーエリア -->
+      <div id="header">
+        <table>
+          <tr>
+            <td id="headLeft">
+              <input value="戻る" type="submit" class="smallButton" formaction="/kikin/menu" method="post" />
+            </td>
+            <td id="headCenter">
+              月別シフト入力
+            </td>
+            <td id="headRight">
+              <input value="ログアウト" type="button" class="smallButton" onclick="logout()" />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 検索・メインボディエリア -->
+      <div id="businessBody">
+        <!-- 表示年月 検索条件 -->
+        <div class="searchForm">
+          <label for="yearMonth">表示年月：</label>
+          <select name="yearMonth" id="yearMonth" style="width: 100px;">
+            <option th:each="yearMonth : ${yearMonthValues}" 
+                    th:value="${yearMonth}" 
+                    th:selected="${yearMonth} == *{yearMonth}" 
+                    th:text="${yearMonth}">
+            </option>
+          </select>
+          <button type="submit" value="search" class="smallButton" style="width: 60px; height: 26px;">検索</button>
+        </div>
+
+        <!-- シフト入力テーブルエリア -->
+        <div class="table-container">
+          <table class="daysTable" id="resize">
+            <thead>
+              <tr class="tableHeader">
+                <td style="width: 150px; text-align: center;">&nbsp;</td>
+                <!-- 日にち（数字） -->
+                <td th:each="dateBean : ${dateBeanList}" class="fontHeaderTitle" style="width: 50px; text-align: center;">
+                  <span th:text="${dateBeanStat.count}"></span>
+                </td>
+              </tr>
+              <tr class="tableHeader">
+                <!-- 社員名 -->
+                <td class="fontHeaderTitle" style="width: 150px; text-align: center;">社員名</td>
+                <!-- 曜日: 文字列比較（日/土）と祝日フラグでクラス適用 -->
+                <td th:each="dateBean : ${dateBeanList}" 
+                    th:classappend="${(dateBean.weekDay == '日' || dateBean.weekDay == '日曜日' || dateBean.publicHolidayFlg) ? 'fontRed' : ((dateBean.weekDay == '土' || dateBean.weekDay == '土曜日') ? 'fontBlue' : 'fontBlack')}"
+                    style="width: 40px; text-align: center; vertical-align: middle;">
+                  <span th:text="${dateBean.weekDay}"></span>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="monthlyShiftInput : ${monthlyShiftInputBean}" class="tableBody">
+                <td style="width: 150px; text-align: center;">
+                  <span th:text="${monthlyShiftInput.employeeName}"></span>
+                </td>
+                
+                <!-- 1日〜28日 -->
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId01" name="shiftIdList[0]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId01} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId01}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId02" name="shiftIdList[1]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId02} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId02}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId03" name="shiftIdList[2]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId03} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId03}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId04" name="shiftIdList[3]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId04} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId04}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId05" name="shiftIdList[4]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId05} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId05}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId06" name="shiftIdList[5]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId06} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId06}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId07" name="shiftIdList[6]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId07} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId07}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId08" name="shiftIdList[7]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId08} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId08}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId09" name="shiftIdList[8]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId09} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId09}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId10" name="shiftIdList[9]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId10} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId10}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId11" name="shiftIdList[10]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId11} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId11}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId12" name="shiftIdList[11]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId12} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId12}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId13" name="shiftIdList[12]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId13} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId13}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId14" name="shiftIdList[13]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId14} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId14}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId15" name="shiftIdList[14]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId15} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId15}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId16" name="shiftIdList[15]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId16} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId16}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId17" name="shiftIdList[16]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId17} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId17}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId18" name="shiftIdList[17]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId18} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId18}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId19" name="shiftIdList[18]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId19} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId19}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId20" name="shiftIdList[19]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId20} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId20}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId21" name="shiftIdList[20]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId21} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId21}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId22" name="shiftIdList[21]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId22} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId22}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId23" name="shiftIdList[22]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId23} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId23}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId24" name="shiftIdList[23]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId24} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId24}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId25" name="shiftIdList[24]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId25} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId25}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId26" name="shiftIdList[25]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId26} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId26}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId27" name="shiftIdList[26]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId27} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId27}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td style="width: 40px; text-align: center;">
+                  <select id="shiftId28" name="shiftIdList[27]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId28} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId28}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+
+                <!-- 29日〜31日 (条件付き表示) -->
+                <td th:if="${dateBeanList.size() > 28}" style="width: 40px; text-align: center;">
+                  <select id="shiftId29" name="shiftIdList[28]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId29} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId29}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td th:if="${dateBeanList.size() > 29}" style="width: 40px; text-align: center;">
+                  <select id="shiftId30" name="shiftIdList[29]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId30} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId30}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+                <td th:if="${dateBeanList.size() > 30}" style="width: 40px; text-align: center;">
+                  <select id="shiftId31" name="shiftIdList[30]">
+                    <option th:value="''" th:selected="${monthlyShiftInput.shiftId31} == ''"></option>
+                    <option th:each="shift : ${shiftCmbMap}" th:value="${shift.key}" th:selected="${shift.key} == ${monthlyShiftInput.shiftId31}" th:text="${shift.value}"></option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+<!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+
+      <!-- フッターエリア -->
+      <div id="footer">
+        <table>
+          <tr>
+            <td id="footLeft">
               <input value="凡例表示" type="button" class="longButton" onclick="openWindow()" />
-              <input value="基本シフト反映" type="submit" class="longButton"  formaction="/kikin/monthlyShiftInput/submitImportKihon" />
-              <input value="出勤希望日反映" type="submit" class="longButton"  formaction="/kikin/monthlyShiftInput/dateRequest" />
-            </div>
-          </td>
-          <td id="footCenter" style="text-align: right;">
-          </td>
-          <td id="footRight">
-            <input value="登録" type="submit" class="smallButton" formaction="/kikin/monthlyShiftInput/regist" />
-          </td>
-        </tr>
-      </table>
-    </div>
-  </form>
-  
+              <input value="基本シフト反映" type="submit" class="longButton" formaction="/kikin/monthlyShiftInput/submitImportKihon" />
+              <input value="出勤希望日反映" type="submit" class="longButton" formaction="/kikin/monthlyShiftInput/dateRequest" />
+            </td>
+            <td id="footCenter" style="text-align: right;"></td>
+            <td id="footRight" style="text-align: right;">
+              <input value="登録" type="submit" class="smallButton" formaction="/kikin/monthlyShiftInput/regist" />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </form>
+  </div>
+
   <script>
     function openWindow() {
-      // 新しいウィンドウを開く
       window.open("ShiftPattern", "windowBPopup", "menubar=no, toolbar=no, scrollbars=auto, resizable=yes, width=520px, height=650px");
-
     }
-
   </script>
 </body>
 

@@ -2,213 +2,259 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
-    <title>基本シフトマスタメンテナンス確認画面</title>
-    <link rel="stylesheet" media="all" th:href="@{/css/common.css}" />
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
-    <script type="text/javascript" th:src="@{/js/message.js}"></script>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+<title>基本シフトマスタメンテナンス確認画面</title>
+<link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/message.js}"></script>
 </head>
 
 <body>
-    <div id="wrapper">
-        <div id="header">
-            <table class="full-width">
-                <tr>
-                    <td id="headLeft">
-                        <form action="/kikin/menu" method="post">
-                            <input value="戻る" type="submit" class="smallButton" />
-                        </form>
-                    </td>
-                    <td id="headCenter">
-                        基本シフト確認
-                    </td>
-                    <td id="headRight">
-                        <input value="ログアウト" type="button" class="smallButton" onclick="logout()" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="businessBody">
-            <div id="pattern" style="width:476px; margin-left:20%; float:left">
-                <div>
-                    <table class="tableHeader">
-                        <tr>
-                            <td width="100px" align="center">
-                                シフト名
-                            </td>
-                            <td width="150px" align="center">
-                                シンボル
-                            </td>
-                            <td width="150px" align="center">
-                                時間
-                            </td>
-                            <td width="50px" align="center">
-                                休憩
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+	<div id="wrapper">
+		<div id="header">
+			<table class="full-width">
+				<tr>
+					<td id="headLeft">
+						<form action="/kikin/menu" method="post">
+							<input value="戻る" type="submit" class="smallButton" />
+						</form>
+					</td>
+					<td id="headCenter">基本シフト確認</td>
+					<td id="headRight"><input value="ログアウト" type="button"
+						class="smallButton" onclick="logout()" /></td>
+				</tr>
+			</table>
+		</div>
+		<div id="businessBody">
+			<!-- 左右並びにするための親コンテナを追加 -->
+			<div class="shift-tables-container">
 
-                <div style="height:450px;overflow:auto">
-                    <table class="tableBody">
-                        <tbody>
-                            <tr th:each="baseShiftPatternBean : ${baseShiftPatternBeanList}">
-                                <td th:text="${baseShiftPatternBean.shiftName}"
-                                    style="width: 100px; text-align: center;">
-                                </td>
-                               <td th:text="${baseShiftPatternBean.symbol}"
-                                    style="width: 150px; text-align: center;">
-                                </td>
-                                <td th:utext="${baseShiftPatternBean.timeZone}"
-                                    style="width: 150px; text-align: center;">
-                                </td>
-                                <td th:text="${baseShiftPatternBean.breakTime}"
-                                    style="width: 50px; text-align: center;">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+				<!-- 【左側の表】シフトパターン一覧 -->
+				<div id="pattern" style="width: 450px;">
+					<div>
+						<table class="tableHeader">
+							<tr>
+								<td width="100px" align="center">シフト名</td>
+								<td width="80px" align="center">シンボル</td>
+								<td width="170px" align="center">時間</td>
+								<td width="100px" align="center">休憩</td>
+							</tr>
+						</table>
+					</div>
 
-                </div>
-            </div>
-            <div id="data" style="width:max-content; margin-left:20px; overflow:auto; float:left">
-                <div style="width: 580px;">
-                    <table class="tableHeader">
-                        <tr>
-                            <td width="228px" align="center">
-                                社員名
-                            </td>
-                            <td width="50px" align="center">
-                                月
-                            </td>
-                            <td width="50px" align="center">
-                                火
-                            </td>
-                            <td width="50px" align="center">
-                                水
-                            </td>
-                            <td width="50px" align="center">
-                                木
-                            </td>
-                            <td width="50px" align="center">
-                                金
-                            </td>
-                            <td width="50px" align="center">
-                                土
-                            </td>
-                            <td width="50px" align="center">
-                                日
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div style="height:450px;width: 580px">
-                    <table class="tableBody">
+					<div style="height: 450px; overflow-y: auto;">
+						<table class="tableBody">
+							<tbody>
+								<tr th:each="baseShiftPatternBean : ${baseShiftPatternBeanList}">
+									<td th:text="${baseShiftPatternBean.shiftName}"
+										style="width: 100px; text-align: center;"></td>
+									<td th:text="${baseShiftPatternBean.symbol}"
+										style="width: 80px; text-align: center;"></td>
+									<td th:utext="${baseShiftPatternBean.timeZone}"
+										style="width: 170px; text-align: center;"></td>
+									<td th:text="${baseShiftPatternBean.breakTime}"
+										style="width: 100px; text-align: center;"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 
-                        <th:block th:each="employee, employeeStat : ${baseShiftMstMntForm.baseShiftMstMntBeanList}">
-                            <tr>
-                                <input type="hidden"
-                                    th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].employeeId"
-                                    th:value="${employee.employeeId}" />
-                                <td width="230px" align="center">
-                                    <span th:text="${employee.employeeName}"></span>
-                                </td>
+				<!-- 【右側の表】社員別シフト一覧 -->
+				<div id="data" style="width: 580px;">
+					<div>
+						<table class="tableHeader">
+							<tr>
+								<td width="230px" align="center">社員名</td>
+								<td width="50px" align="center">月</td>
+								<td width="50px" align="center">火</td>
+								<td width="50px" align="center">水</td>
+								<td width="50px" align="center">木</td>
+								<td width="50px" align="center">金</td>
+								<td width="50px" align="center">土</td>
+								<td width="50px" align="center">日</td>
+							</tr>
+						</table>
+					</div>
+					<div style="height: 450px; overflow-y: auto;">
+						<table class="tableBody">
+							<tbody>
+								<tr
+									th:each="employee, employeeStat : ${baseShiftMstMntForm.baseShiftMstMntBeanList}">
+									<input type="hidden"
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].employeeId"
+										th:value="${employee.employeeId}" />
+									<td width="230px" align="center"><span
+										th:text="${employee.employeeName}"></span></td>
 
-                                <!-- 月曜日のシフト -->
-                                <td width="50px" align="center">
-                                    <select th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnMonday" disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnMonday == entry.key}">
-                                        </option>
-                                    </select>
+									<!-- 月曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnMonday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnMonday == entry.key}">
+											</option>
+									</select></td>
 
-                                </td>
+									<!-- 火曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnTuesday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnTuesday == entry.key}">
+											</option>
+									</select></td>
 
-                                <td width="50px" align="center">
-                                    <select
-                                        th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnTuesday"
-                                        disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnTuesday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                                <td width="50px" align="center">
-                                    <select
-                                        th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnWednesday"
-                                        disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnWednesday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                                <td width="50px" align="center">
-                                    <select
-                                        th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnThursday"
-                                       disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnThursday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                                <td width="50px" align="center">
-                                    <select th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnFriday"
-                                        disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnFriday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                                <td width="50px" align="center">
-                                    <select
-                                        th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnSaturday"
-                                       disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnSaturday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                                <td width="50px" align="center">
-                                    <select th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnSunday"
-                                       disabled>
-                                        <option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
-                                            th:value="${entry.key}" th:text="${entry.value}"
-                                            th:selected="${employee.shiftIdOnSunday == entry.key}">
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </th:block>
-                    </table>
-                </div>
+									<!-- 水曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnWednesday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnWednesday == entry.key}">
+											</option>
+									</select></td>
 
-            </div>
+									<!-- 木曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnThursday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnThursday == entry.key}">
+											</option>
+									</select></td>
 
-        </div>
+									<!-- 金曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnFriday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnFriday == entry.key}">
+											</option>
+									</select></td>
 
-    </div>
-    <div id="footer">
-        <table>
-            <tr>
-                <td id="footLeft">
-                </td>
-                <td id="footCenter">
-                </td>
-                <td id="footRight">
-                </td>
-            </tr>
-        </table>
-    </div>
+									<!-- 土曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnSaturday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnSaturday == entry.key}">
+											</option>
+									</select></td>
 
+									<!-- 日曜日 -->
+									<td width="50px" align="center"><select
+										th:name="baseShiftMstMntBeanList[__${employeeStat.index}__].shiftIdOnSunday"
+										disabled>
+											<option th:each="entry : ${baseShiftMstMntForm.shiftCmbMap}"
+												th:value="${entry.key}" th:text="${entry.value}"
+												th:selected="${employee.shiftIdOnSunday == entry.key}">
+											</option>
+									</select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 
+			</div>
+		</div>
+	</div>
+
+<!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+
+<!-- 川・波なみアニメーション -->
+	<div class="river">
+		<!-- 奥の波 -->
+		<svg class="wave wave-back"
+			viewBox="0 24 150 28"
+			preserveAspectRatio="none"
+			shape-rendering="auto">
+			<defs>
+			<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="0"
+				fill="rgba(184, 232, 245, 0.7)" />
+          <use href="#gentle-wave" x="48" y="3"
+				fill="rgba(141, 211, 230, 0.5)" />
+        </g>
+      </svg>
+
+		<!-- 手前の波（メインの川） -->
+		<svg class="wave wave-front" viewBox="0 24 150 28"
+			preserveAspectRatio="none" shape-rendering="auto">
+        <g class="parallax">
+          <use href="#gentle-wave" x="48" y="5"
+				fill="rgba(112, 194, 218, 0.8)" />
+          <use href="#gentle-wave" x="48" y="7" fill="#5BB2CE" />
+        </g>
+      </svg>
+
+		<!-- 水面の光 -->
+		<div class="water-light"></div>
+
+		<!-- どんぶらこ桃 -->
+		<div class="momo">
+			🍑
+			<div class="ripple"></div>
+		</div>
+
+	</div>
+
+	<div id="footer">
+		<table>
+			<tr>
+				<td id="footLeft"></td>
+				<td id="footCenter"></td>
+				<td id="footRight"></td>
+			</tr>
+		</table>
+	</div>
 </body>
 
 </html>
