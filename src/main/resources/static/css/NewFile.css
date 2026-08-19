@@ -553,3 +553,16 @@ errorbody {
 #businessBody .daysTable td {
     background: transparent !important;
 }
+
+.searchForm input.smallButton[type="submit"] {
+    background-color: #9addfa!important;
+    color: #12689A !important;
+    opacity: 1 !important;
+    border: 1px solid #B1DCE5 !important;
+}
+
+.searchForm input.smallButton[type="submit"]:hover {
+    background-color: #E8F5F8 !important;
+    color: #12689A !important;
+    opacity: 1 !important;
+}
