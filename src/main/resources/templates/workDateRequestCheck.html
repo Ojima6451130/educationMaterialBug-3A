@@ -30,10 +30,17 @@
             </tr>
           </table>
         </div>
-        <div>
+        <div style="text-align: center; 
+    margin: 20px auto; 
+    padding: 12px 24px; 
+    width: fit-content; 
+    background-color: #ffffff; 
+    border: 1px solid #e0e6ed; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
           <form id="searchForm" action="/kikin/workDateRequestCheck/search" method="post" th:object="${workDateRequestCheckForm}">
             <label>表示年月：</label>
-            <select th:name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
+            <select th:name="yearMonth" id="yearMonth" style="width: auto; color: black;">
                 <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
             </select>
             <input value="検索" type="submit" class="smallButton paws-btn" style="width: 60px; height: 26px;" />
@@ -136,7 +143,7 @@
 
 		<!-- どんぶらこ桃 -->
 		<div class="momo">
-			🍑
+			👹👹👹👹👹👦🍑
 			<div class="ripple"></div>
 		</div>
 
