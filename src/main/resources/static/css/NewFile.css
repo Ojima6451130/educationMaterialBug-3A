@@ -8,6 +8,15 @@ body {
 	font-family: "メイリオ", Meiryo, sans-serif;
 }
 
+#tatakai {
+    background-image: url('/images/tatakai.png');
+    background-position: left bottom;  /* 左下に配置 */
+    background-repeat: no-repeat;     /* 繰り返さない */
+    background-size: 250px auto;        /* サイズ（お好みで調整） */
+    background-attachment: fixed;       /* スクロールしても固定（固定したくない場合は削除） */
+}
+
+
 #sibakari {
 	/* 1つ目に「おじいさん」、2つ目に「森」の画像ファイルを指定 */
     background-image: url('../images/sibazii.png'), url('../images/mori.png') ;
