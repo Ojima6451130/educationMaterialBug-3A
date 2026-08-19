@@ -36,7 +36,7 @@
             <select th:name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
                 <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
             </select>
-            <input value="検索" type="submit" class="smallButton" style="width: 60px; height: 26px;" />
+            <input value="検索" type="submit" class="smallButton paws-btn" style="width: 60px; height: 26px;" />
           </form>
         </div>
         <div id="businessBody">
@@ -147,7 +147,7 @@
             <tr>
               <td id="footLeft">
               <div style="margin-left:50px;">
-                <input value="凡例表示" type="button" class="longButton"  onclick="openWindow()" />
+                <input value="凡例表示" type="button" class="smallButton paws-btn" style="position: relative; top: -50px; font-size: 14px; padding: 6px 16px;" onclick="openWindow()" />
               </div>
               </td>
               <td id="footCenter">
