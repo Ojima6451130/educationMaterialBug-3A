@@ -2767,3 +2767,8 @@ errorbody {
 	animation: momoMove 22s linear infinite, momoFloat 2s ease-in-out infinite;
 	animation-delay: 16s;
 }
+
+.widthTable {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+}

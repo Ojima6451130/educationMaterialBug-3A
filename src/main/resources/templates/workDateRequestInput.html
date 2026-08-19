@@ -9,6 +9,77 @@
     <link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <script type="text/javascript" th:src="@{/js/message.js}"></script>
+    
+    <script>
+  function openWindow() {
+    window.open("ShiftPattern", "windowBPopup", "menubar=no, toolbar=no, scrollbars=auto, resizable=yes, width=520px, height=650px");
+  }
+  function openSearch(){
+    window.open("/kikin/workDateRequestCheck", "searchPopup", "menubar=no, toolbar=no, scrollbars=auto, resizable=yes, width=1000px, height=600px")
+  }
+
+  // ★追加：団子を飛ばす隠しコマンドの関数
+  function throwDango() {
+    // 一度に5個の団子を飛ばす
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const dango = document.createElement('div');
+        dango.classList.add('dango-emoji');
+        dango.innerText = '🍡';
+        
+        // 画面の横幅の中でランダムな位置に出現
+        dango.style.left = Math.random() * 90 + 'vw';
+        
+        document.body.appendChild(dango);
+        
+        // アニメーションが終わったら要素を削除
+        setTimeout(() => {
+          dango.remove();
+        }, 2000);
+      }, i * 100); // 0.1秒ずつずらして出現
+    }
+  }
+</script>
+
+    <style>
+      body {
+        /* 1. 画像のパスを指定（画像のファイル名・パスに合わせて変更してください） */
+        background-image: url('/images/kijigazo.png'); 
+        
+        /* 2. 縦横比を保ったまま、画面いっぱいに拡大表示 */
+        background-size: cover; 
+        
+        /* 3. 画像の中心を基準に配置 */
+        background-position: center center; 
+        
+        /* 4. スクロールしても背景画像を固定する */
+        background-attachment: fixed; 
+        
+        /* 5. 画像が繰り返されないようにする */
+        background-repeat: no-repeat; 
+      }
+      
+      /* 団子のスタイルとアニメーション */
+  .dango-emoji {
+    position: fixed;
+    bottom: -50px;
+    font-size: 30px;
+    pointer-events: none; /* クリックを邪魔しない */
+    z-index: 9999;
+    animation: flyUp 2s linear forwards;
+  }
+
+  @keyframes flyUp {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+    </style>
 </head>
 
 <body>
@@ -270,6 +341,7 @@
           <input value="凡例表示" type="button"  class="smallButton paws-btn"  onclick="openWindow()" />
           <input value="出勤希望日参照" type="button"  class="smallButton paws-btn" style="width: auto; padding: 0 15px;" onclick="openSearch()">
           <input value="登録" type="submit" form="registForm"   class="smallButton paws-btn">
+          <button type="button" class="smallButton paws-btn" onclick="throwDango()">🍡</button>
           </div>
         
         </div>
@@ -314,8 +386,8 @@
 		<div class="water-light"></div>
 
 		<!-- どんぶらこ桃 -->
-		<div class="momo">
-			🐦　🐒　🐕　🍑
+		<div class="momo"><span style="display: inline-block; transform: scaleX(-1);">
+		🐕　🐒　🐦　</span>🍑
 			<div class="ripple"></div>
 		</div>
 
