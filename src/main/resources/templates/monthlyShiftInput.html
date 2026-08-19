@@ -13,30 +13,36 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
   <title>月別シフト入力画面</title>
-  <link rel="stylesheet" media="all" th:href="@{/css/NewFile.css}" />
+  <link rel="stylesheet" media="all" th:href="@{/css/monthlyShiftInput.css}" />
   <script type="text/javascript" th:src="@{/js/common.js}"></script>
   <script type="text/javascript" th:src="@{/js/message.js}"></script>
   <style>
     /* テーブル部分のスクロールと余白調整 */
     .table-container {
-      max-height: calc(100vh - 220px);
-      overflow-x: auto;
-      overflow-y: auto;
-      border: 1px solid #B1DCE5;
-      margin: 10px auto;
-      width: fit-content; /* 右側の余計な空白を無くす */
-      max-width: 100%;
-    }
+    max-height: calc(100vh - 330px);
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #B1DCE5;
+    margin: 10px auto;
+    width: fit-content;
+    max-width: 100%;
+}
 
     .daysTable {
       border-collapse: collapse;
     }
 
-    .daysTable thead td {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
+.daysTable thead td {
+  position: sticky;
+  z-index: 2;
+  background-color: white;
+}
+.daysTable thead tr:first-child td {
+  top: 0;
+}
+.daysTable thead tr:nth-child(2) td {
+  top: 30px;
+}
 
     /* CSS詳細度の問題で色が上書きされない対策 */
     .daysTable thead td.fontRed {
