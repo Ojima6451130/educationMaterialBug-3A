@@ -131,18 +131,19 @@
 	background-color: yellow;
 }
 
-/* 検索バーと社員情報のレイアウト調整 */
+/* 検索バーと社員情報のレイアウト調整（中央寄せ＆右端絶対配置） */
 .searchContainer {
 	width: 100%;
 	margin-bottom: 15px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center; /* 検索フォームを中央配置 */
 	align-items: center;
+	position: relative;     /* 社員情報の基準位置 */
 }
 </style>
 </head>
 
-<body>
+<body id="onigasima">
 	<div id="wrapper">
 		<!-- ヘッダー -->
 		<div id="header">
@@ -166,18 +167,20 @@
 
 				<!-- 検索・社員情報エリア -->
 				<div class="searchContainer">
+					<!-- 表示年月検索フォーム（中央） -->
 					<form action="/kikin/workRecordInput/search" method="post"
-						th:object="${workRecordInputForm}" style="margin: 0;">
+						th:object="${workRecordInputForm}" style="margin: 0; display: flex; align-items: center; gap: 5px;">
 						<label>表示年月：</label> <select name="yearMonth" id="yearMonth">
 							<option th:each="entry : ${yearMonthCmbMap.entrySet()}"
 								th:text="${entry.value}" th:value="${entry.key}"
 								th:selected="${entry.key == workRecordInputForm.yearMonth}">
 							</option>
-						</select> <input value="検索" type="submit" class="smallButton"
+						</select> <input value="検索" type="submit" class="smallButton paws-btn"
 							style="width: 60px; height: 26px;" />
 					</form>
 
-					<div style="text-align: right; font-weight: bold;">
+					<!-- 社員情報（右端固定） -->
+					<div style="position: absolute; right: 0; font-weight: bold; white-space: nowrap;">
 						社員ID：<span th:text="${loginUserDto.employeeId}"></span>
 						&nbsp;&nbsp; 社員名：<span th:text="${loginUserDto.employeeName}"></span>
 					</div>
@@ -186,7 +189,7 @@
 				<!-- 入力テーブルエリア -->
 				<form action="/kikin/workRecordInput/regist" id="registForm"
 					method="post" th:object="${workRecordInputForm}">
-					<table class="daysTable">
+					<table class="onisimadaysTable">
 						<thead class="tableHeader"
 							style="display: block; position: sticky; top: 0; width: max-content;">
 							<tr>
@@ -351,7 +354,7 @@
 				<tr>
 					<td id="footLeft"></td>
 					<td id="footCenter"></td>
-					<td id="footRight" style="text-align: right;"><input
+					<td id="onisimafootRight" style="text-align: right;"><input
 						value="登録" type="button" class="smallButton"
 						onclick="register(event)" /></td>
 				</tr>

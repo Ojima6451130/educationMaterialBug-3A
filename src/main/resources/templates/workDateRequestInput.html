@@ -30,33 +30,40 @@
             </tr>
           </table>
         </div>
-        <div>
+        <div style="text-align: center; 
+    margin: 20px auto; 
+    padding: 12px 24px; 
+    width: fit-content; 
+    background-color: #ffffff; 
+    border: 1px solid #e0e6ed; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
           <form id="searchForm" action="/kikin/workDateRequestInput/search" method="post" th:object="${workDateRequestInputForm}">
             <label>表示年月：</label>
-            <select th:name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
+            <select th:name="yearMonth" id="yearMonth" style="width: auto; color: black;">
                 <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
             </select>
-            <button type="submit" value="search" >検索</button> 
+            <button type="submit" value="search" class="smallButton paws-btn">検索</button> 
           </form>
         </div>
         <div id="businessBody">
           <form id="registForm" action="/kikin/workDateRequestInput/regist" method="post" th:object="${workDateRequestInputForm}">
             <input type="hidden" th:field="*{yearMonth}" th:value="${yearMonth}">
-            <table class="widthTable">
-              <thead style="display: block; position: sticky;">
+            <table class="widthTable" style="border-collapse: collapse; width: 100%;">
+              <thead>
                 <tr class="tableHeader">
-                  <td style="width: 150px; text-align: center;">
+                  <td style="width: 120px; text-align: center;">
                     &nbsp;
                   </td>
-                  <td th:each="dateBean : ${datebeanList}" style="width: 50px; text-align: center;">
+                  <td th:each="dateBean : ${datebeanList}" style="text-align: center;">
                     <span th:value="${dateBeanStat.count}">[[${dateBeanStat.count}]]</span>
                   </td>
                 </tr>
                 <tr class="tableHeader">
-                  <td style="width: 150px; text-align: center; white-space: nowrap;">
+                  <td style="width: 120px; text-align: center; white-space: nowrap;">
                     社員名
                   </td>
-                  <td th:each="dateBean : ${datebeanList}" style="width: 50px; text-align: center; vertical-align: middle;">
+                  <td th:each="dateBean : ${datebeanList}" style="text-align: center; vertical-align: middle;">
                     <span th:if="${dateBean.weekDay == saturday && !dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: blue;">[[${dateBean.weekDay}]]</span>
                     <span th:if="${dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: red;">[[${dateBean.weekDay}]]</span>
                     <span th:unless="${dateBean.weekDay == saturday || dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" 
@@ -64,193 +71,193 @@
                   </td>
                 </tr>
               </thead>
-              <tbody style="display: block; max-height: 400px; overflow-y: auto;">
+              <tbody>
                 <tr th:each="workDateRequestInputBean : ${workDateRequestInputBeanList}" th:if="${workDateRequestInputBean.employeeId == userId}" class="tableBody">
-                  <td class="tableBody" style="width: 131px; text-align: center;">
+                  <td class="tableBody" style="width: 140px; text-align: center;box-sizing: border-box;">
                     <span th:value="${workDateRequestInputBean.employeeName}">[[${workDateRequestInputBean.employeeName}]]</span>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId01" name="shiftIdList[0]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId01" name="shiftIdList[0]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId01} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId01}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId02" name="shiftIdList[1]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId02" name="shiftIdList[1]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId02} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId02}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId03" name="shiftIdList[2]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId03" name="shiftIdList[2]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId03} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId03}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId04" name="shiftIdList[3]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId04" name="shiftIdList[3]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId04} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId04}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId05" name="shiftIdList[4]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId05" name="shiftIdList[4]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId05} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId05}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId06" name="shiftIdList[5]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId06" name="shiftIdList[5]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId06} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId06}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId07" name="shiftIdList[6]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId07" name="shiftIdList[6]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId07} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId07}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId08" name="shiftIdList[7]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId08" name="shiftIdList[7]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId08} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId08}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId09" name="shiftIdList[8]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId09" name="shiftIdList[8]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId09} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId09}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId10" name="shiftIdList[9]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId10" name="shiftIdList[9]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId10} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId10}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId11" name="shiftIdList[10]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId11" name="shiftIdList[10]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId11} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId11}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId12" name="shiftIdList[11]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId12" name="shiftIdList[11]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId12} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId12}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId13" name="shiftIdList[12]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId13" name="shiftIdList[12]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId13} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId13}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId14" name="shiftIdList[13]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId14" name="shiftIdList[13]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId14} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId14}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId15" name="shiftIdList[14]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId15" name="shiftIdList[14]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId15} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId15}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId16" name="shiftIdList[15]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId16" name="shiftIdList[15]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId16} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId16}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId17" name="shiftIdList[16]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId17" name="shiftIdList[16]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId17} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId17}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId18" name="shiftIdList[17]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId18" name="shiftIdList[17]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId18} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId18}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId19" name="shiftIdList[18]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId19" name="shiftIdList[18]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId19} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId19}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId20" name="shiftIdList[19]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId20" name="shiftIdList[19]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId20} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId20}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId21" name="shiftIdList[20]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId21" name="shiftIdList[20]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId21} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId21}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId22" name="shiftIdList[21]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId22" name="shiftIdList[21]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId22} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId22}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId23" name="shiftIdList[22]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId23" name="shiftIdList[22]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId23} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId23}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId24" name="shiftIdList[23]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId24" name="shiftIdList[23]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId24} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId24}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId25" name="shiftIdList[24]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId25" name="shiftIdList[24]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId25} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId25}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId26" name="shiftIdList[25]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId26" name="shiftIdList[25]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId26} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId26}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId27" name="shiftIdList[26]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId27" name="shiftIdList[26]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId27} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId27}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId28" name="shiftIdList[27]">
+                  <td class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId28" name="shiftIdList[27]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId28} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId28}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td th:if="${#lists.size(datebeanList) > 28}" class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId29" name="shiftIdList[28]">
+                  <td th:if="${#lists.size(datebeanList) > 28}" class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId29" name="shiftIdList[28]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId29} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId29}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td th:if="${#lists.size(datebeanList) > 29}" class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId30" name="shiftIdList[29]">
+                  <td th:if="${#lists.size(datebeanList) > 29}" class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId30" name="shiftIdList[29]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId30} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId30}" th:inline="text">[[${shift.value}]]</option>
                     </select>
                   </td>
-                  <td th:if="${#lists.size(datebeanList) > 30}" class="tableBody" style="width: 47px; text-align: center;">
-                    <select id="shiftId31" name="shiftIdList[30]">
+                  <td th:if="${#lists.size(datebeanList) > 30}" class="tableBody" style="width: 50px; text-align: center;">
+                    <select id="shiftId31" name="shiftIdList[30]" style="width: 100%;">
                       <option th:value="''" th:selected="${workDateRequestInputBean.shiftId31} == ''" th:inline="text"></option>
                       <option th:each="shift : ${comboShift}" th:value="${shift.key}" th:selected="${shift.key} == ${workDateRequestInputBean.shiftId31}" th:inline="text">[[${shift.value}]]</option>
                     </select>
@@ -259,7 +266,21 @@
               </tbody>
             </table>
           </form>
+          <div class="syukkinkiboubinyuryoku">
+          <input value="凡例表示" type="button"  class="smallButton paws-btn"  onclick="openWindow()" />
+          <input value="出勤希望日参照" type="button"  class="smallButton paws-btn" style="width: auto; padding: 0 15px;" onclick="openSearch()">
+          <input value="登録" type="submit" form="registForm"   class="smallButton paws-btn">
+          </div>
+        
         </div>
+        
+        <div class="character-container">
+  <img src="images/momotaro.png" alt="桃太郎" class="char-img" />
+  <img src="images/dog.png" alt="犬" class="char-img" />
+  <img src="images/monkey.png" alt="サル" class="char-img" />
+  <!-- キジ（初期状態は隠す） -->
+  <img src="images/kiji.png" alt="キジ" id="kijiImg" class="char-img kiji-img" />
+</div>
         
         <!-- 川・波なみアニメーション -->
 	<div class="river">
@@ -294,7 +315,7 @@
 
 		<!-- どんぶらこ桃 -->
 		<div class="momo">
-			🍑
+			🐦　🐒　🐕　🍑
 			<div class="ripple"></div>
 		</div>
 
@@ -305,15 +326,14 @@
             <tr>
               <td id="footLeft">
               <div style="margin-left:50px;">
-                <input value="凡例表示" type="button" class="longButton"  onclick="openWindow()" />
+                
               </div>
               </td>
               <td id="footCenter">
                 　
               </td>
               <td id="footRight">
-                <input value="出勤希望日参照" type="button" class="longButton" onclick="openSearch()">
-                <input value="登録" type="submit" form="registForm"  class="smallButton">               
+                               
               </td>
             </tr>
           </table>

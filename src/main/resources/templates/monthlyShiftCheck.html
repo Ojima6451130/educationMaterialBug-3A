@@ -33,74 +33,84 @@
     <div>
       <form id="sibakariSearchForm" action="/kikin/monthlyShiftCheck/search" method="post" th:object="${MonthlyShiftCheckForm}">
         <label >表示年月：</label>
-        <select name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
+        <select name="yearMonth" id="yearMonth" style="width: 100px; color: black;">
             <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
         </select>
-        <input value="検索" type="submit" class="smallButton" style="width: 60px; height: 26px;" />
+        <input value="検索" type="submit" class="smallButton paws-btn" style="width: 60px; height: 26px;" />
       </form>
     </div>
     <div id="businessBody">
-      <table class="sibakariDaysTable">
-        <thead style="display: block; position: sticky;">
-          <tr class="tableHeader">
-            <td style="width: 150px; text-align: center;">
-              &nbsp;
-            </td>
-            <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center;">
-              <span th:text="${dateBeanStat.count}"></span>
-            </td>
-          </tr>
-          <tr class="tableHeader">
-            <td style="width: 150px; text-align: center; white-space: nowrap;">
-              社員名
-            </td>
-            <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center; vertical-align: middle;">
-              <span th:if="${dateBean.weekDay == saturday && !dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: blue;">[[${dateBean.weekDay}]]</span>
-              <span th:if="${dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: red;">[[${dateBean.weekDay}]]</span>
-              <span th:unless="${dateBean.weekDay == saturday || dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" 
-                        th:value="${dateBean.weekDay}" style="color: black;">[[${dateBean.weekDay}]]</span>
-            </td>
-          </tr>
-        </thead>
-        <tbody style="display: block; max-height: 400px; overflow-y: scroll;">
-          <tr th:each="monthlyShiftCheck : ${monthlyShiftCheckBean}" class="tableBody">
-            <td class="tableBody" style="width: 150px; text-align: center;">
-              <span th:text="${monthlyShiftCheck.employeeName}"></span>
-            </td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol01}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol02}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol03}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol04}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol05}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol06}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol07}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol08}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol09}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol10}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol11}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol12}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol13}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol14}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol15}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol16}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol17}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol18}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol19}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol20}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol21}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol22}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol23}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol24}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol25}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol26}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol27}"></td>
-            <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol28}"></td>
-            <td th:if="${dateBeanList.size() > 28}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol29}"></td>
-            <td th:if="${dateBeanList.size() > 29}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol30}"></td>
-            <td th:if="${dateBeanList.size() > 30}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol31}"></td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- 1. スクロール用の外枠（HTMLのみで定義） -->
+      <div style="max-height: 400px; max-width: 100%; overflow: auto; margin: 0 auto;">
+        <table class="sibakariDaysTable" style="border-collapse: separate; border-spacing: 0;">
+          <thead>
+            <!-- ヘッダー1行目（日付） -->
+            <tr class="tableHeader">
+              <!-- 左上交差角（上＆左固定、最前面 z-index: 10） -->
+              <td style="width: 150px; text-align: center; position: sticky; top: 0; left: 0; z-index: 10; background-color: #E8F5F8;">
+                &nbsp;
+              </td>
+              <!-- 上部日付ヘッダー（上固定 z-index: 5） -->
+              <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center; position: sticky; top: 0; z-index: 5; background-color: #E8F5F8;">
+                <span th:text="${dateBeanStat.count}"></span>
+              </td>
+            </tr>
+            <!-- ヘッダー2行目（曜日） -->
+            <tr class="tableHeader">
+              <!-- 左上交差角（上＆左固定、最前面 z-index: 10） ※top数値は1行目の高さに応じて調整 -->
+              <td style="width: 150px; text-align: center; white-space: nowrap; position: sticky; top: 24px; left: 0; z-index: 10; background-color: #E8F5F8;">
+                社員名
+              </td>
+              <!-- 上部曜日ヘッダー（上固定 z-index: 5） -->
+              <td th:each="dateBean : ${dateBeanList}" style="width: 40px; text-align: center; vertical-align: middle; position: sticky; top: 24px; z-index: 5; background-color: #E8F5F8;">
+                <span th:if="${dateBean.weekDay == saturday && !dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: blue;">[[${dateBean.weekDay}]]</span>
+                <span th:if="${dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" th:value="${dateBean.weekDay}" style="color: red;">[[${dateBean.weekDay}]]</span>
+                <span th:unless="${dateBean.weekDay == saturday || dateBean.weekDay == sunday || dateBean.publicHolidayFlg}" 
+                          th:value="${dateBean.weekDay}" style="color: black;">[[${dateBean.weekDay}]]</span>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="monthlyShiftCheck : ${monthlyShiftCheckBean}" class="tableBody">
+              <!-- 左端社員名（左固定 z-index: 6、透過防止のため背景色 #ffffff） -->
+              <td class="tableBody" style="width: 150px; text-align: center; position: sticky; left: 0; z-index: 6; background-color: #ffffff;">
+                <span th:text="${monthlyShiftCheck.employeeName}"></span>
+              </td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol01}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol02}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol03}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol04}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol05}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol06}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol07}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol08}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol09}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol10}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol11}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol12}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol13}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol14}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol15}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol16}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol17}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol18}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol19}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol20}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol21}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol22}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol23}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol24}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol25}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol26}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol27}"></td>
+              <td class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol28}"></td>
+              <td th:if="${dateBeanList.size() > 28}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol29}"></td>
+              <td th:if="${dateBeanList.size() > 29}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol30}"></td>
+              <td th:if="${dateBeanList.size() > 30}" class="tableBody" style="width: 40px; text-align: center;" th:text="${monthlyShiftCheck.symbol31}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- 川・波なみアニメーション -->
 	<div class="river">
@@ -143,7 +153,8 @@
     <div id="footer" >
       <table>
         <tr>
-          <td id="footLeft">
+          <!-- ボタン移動のスタイリングも直接記述 -->
+          <td id="sibakarifootLeft" style="display: flex; align-items: center; gap: 10px; position: relative; top: -25px;">
             <input value="凡例表示" type="button" class="longButton" onclick="openWindow()" />
             <form id="excelForm" action="/kikin/monthlyShiftCheck/print" method="post" th:object="${MonthlyShiftCheckForm}">
               <input id="yearMonth" type="hidden" th:field="*{yearMonth}" th:value="${yearMonth}">
@@ -161,4 +172,3 @@
 </body>
 
 </html>
-
