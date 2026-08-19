@@ -129,6 +129,15 @@ errorbody {
 	color: #333333;
 }
 
+#sibakariSearchForm {
+	display: flex;
+    justify-content: center; 
+    align-items: center;     
+    margin:auto;        
+    font-weight: bold;
+    color: #333333;
+}
+
 .searchForm select {
 	padding: 3px 6px;
 	border: 1px solid #B1DCE5;
@@ -337,6 +346,21 @@ errorbody {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+}
+
+#sibakarifootLeft {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+	top: -25px;
+}
+
+#onisimafootRight {
+	width: 15%;
+	text-align: center;
+	position: relative;
+	right: 40px;
 }
 
 #excelForm {
