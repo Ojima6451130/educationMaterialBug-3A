@@ -114,7 +114,7 @@ errorbody {
 #businessBody {
 	height: calc(100vh - 125px);
 	overflow: auto;
-	background-color: #FFFFFF;
+	background-color: transparent;
 	padding: 30px 50px;
 	box-sizing: border-box;
 	display: flex;
@@ -127,14 +127,6 @@ errorbody {
 	margin-bottom: 20px;
 	font-weight: bold;
 	color: #333333;
-}
-#sibakariSearchForm {
-	display: flex;
-    justify-content: center; 
-    align-items: center;     
-    margin:auto;        
-    font-weight: bold;
-    color: #333333;
 }
 
 .searchForm select {
@@ -215,21 +207,8 @@ errorbody {
 /* --- 3. 表（テーブル）の罫線とデザイン --- */
 .daysTable {
 	border-collapse: collapse;
-	background-color: #FFFFFF;
+	background-color: rgba(255, 255, 255, 0.75);
 }
-
-.sibakariDaysTable {
-	border-collapse: collapse;
-	background-color: rgba(255, 255, 255, 0.7) !important; /* 70%の半透明白 */
-	backdrop-filter: blur(4px); /* 背景を少しボカす（すりガラス効果） */
-}
-
-.sibakariDaysTable thead tr.tableHeader td {
-	background-color: rgba(232, 245, 248, 0.8) !important;
-	font-weight: bold;
-}
-
-
 
 .daysTable td {
 	border: 1px solid #B1DCE5;
@@ -452,4 +431,44 @@ errorbody {
     color: #333333;
     opacity: 1;
     background-color: #FAFAFA;
+}
+
+/* =========================================
+   桃太郎誕生画像
+   PC画面いっぱいの背景
+   ========================================= */
+
+.momotaro-bg {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    /* 画面いっぱいに表示 */
+    object-fit: cover;
+
+    /* 画像の中央を基準に表示 */
+    object-position: center center;
+
+    /* 背景として表示 */
+    z-index: 0;
+
+    /* 背景として少し透けさせる */
+    opacity: 0.30;
+
+    /* クリック操作を邪魔しない */
+    pointer-events: none;
+}
+
+/* 月別シフト入力画面の表を完全透明 */
+#businessBody .table-container,
+#businessBody .daysTable,
+#businessBody .daysTable tbody,
+#businessBody .daysTable thead,
+#businessBody .daysTable tr,
+#businessBody .daysTable td {
+    background: transparent !important;
 }
