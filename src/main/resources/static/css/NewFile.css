@@ -8,6 +8,38 @@ body {
 	font-family: "メイリオ", Meiryo, sans-serif;
 }
 
+#sibakari {
+	/* 1つ目に「おじいさん」、2つ目に「森」の画像ファイルを指定 */
+    background-image: url('../images/sibazii.png'), url('../images/mori.png') ;
+    
+    /* 1つ目を右側、2つ目を左側に配置 */
+    background-position: right bottom, left bottom ;
+    
+    /* それぞれの大きさを調整（例: おじいさんは幅40%、森は幅50%） */
+    background-size: 20% auto, 70% auto ;
+    
+    /* 両方の画像を繰り返し表示しない */
+    background-repeat: no-repeat, no-repeat ;
+    
+    background-attachment: fixed ;
+}
+
+#sibakari #businessBody {
+    background-color: transparent; /* 背景画像をそのまま透けさせる場合 */
+}
+
+#onigasima {
+	background-image: url('../images/onisima.png');
+	background-position: right bottom;
+	background-size: 20% auto;
+	background-repeat: no-repeat;
+	background-attachment: fixed ;
+}
+
+#onigasima #businessBody {
+	background-color: transparent;
+}
+
 errorbody {
 	background-color: red;
 }
@@ -96,6 +128,14 @@ errorbody {
 	font-weight: bold;
 	color: #333333;
 }
+#sibakariSearchForm {
+	display: flex;
+    justify-content: center; 
+    align-items: center;     
+    margin:auto;        
+    font-weight: bold;
+    color: #333333;
+}
 
 .searchForm select {
 	padding: 3px 6px;
@@ -177,6 +217,19 @@ errorbody {
 	border-collapse: collapse;
 	background-color: #FFFFFF;
 }
+
+.sibakariDaysTable {
+	border-collapse: collapse;
+	background-color: rgba(255, 255, 255, 0.7) !important; /* 70%の半透明白 */
+	backdrop-filter: blur(4px); /* 背景を少しボカす（すりガラス効果） */
+}
+
+.sibakariDaysTable thead tr.tableHeader td {
+	background-color: rgba(232, 245, 248, 0.8) !important;
+	font-weight: bold;
+}
+
+
 
 .daysTable td {
 	border: 1px solid #B1DCE5;

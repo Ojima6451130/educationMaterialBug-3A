@@ -11,7 +11,7 @@
   <script type="text/javascript" th:src="@{/js/message.js}"></script>
 </head>
 
-<body>
+<body id="sibakari">
   <div id="wrapper">
     <div id="header">
       <table class="centered-container">
@@ -31,8 +31,8 @@
       </table>
     </div>
     <div>
-      <form id="searchForm" action="/kikin/monthlyShiftCheck/search" method="post" th:object="${MonthlyShiftCheckForm}">
-        <label>表示年月：</label>
+      <form id="sibakariSearchForm" action="/kikin/monthlyShiftCheck/search" method="post" th:object="${MonthlyShiftCheckForm}">
+        <label >表示年月：</label>
         <select name="yearMonth" id="yearMonth" style="width: 5%; color: black;">
             <option th:each="yearMonth : ${yearMonthValues}" th:value="${yearMonth}" th:selected="${yearMonth} == *{yearMonth}" th:inline="text" inputmode="text">[[${yearMonth}]]</option>
         </select>
@@ -40,7 +40,7 @@
       </form>
     </div>
     <div id="businessBody">
-      <table class="daysTable">
+      <table class="sibakariDaysTable">
         <thead style="display: block; position: sticky;">
           <tr class="tableHeader">
             <td style="width: 150px; text-align: center;">
