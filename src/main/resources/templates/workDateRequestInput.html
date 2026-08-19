@@ -21,7 +21,7 @@
   // ★追加：団子を飛ばす隠しコマンドの関数
   function throwDango() {
     // 一度に5個の団子を飛ばす
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 50; i++) {
       setTimeout(() => {
         const dango = document.createElement('div');
         dango.classList.add('dango-emoji');
@@ -42,7 +42,22 @@
 </script>
 
     <style>
-      
+      body {
+        /* 1. 画像のパスを指定（画像のファイル名・パスに合わせて変更してください） */
+        background-image: url('images/kijigazo.png'); 
+        
+        /* 2. 縦横比を保ったまま、画面いっぱいに拡大表示 */
+        background-size: cover; 
+        
+        /* 3. 画像の中心を基準に配置 */
+        background-position: center center; 
+        
+        /* 4. スクロールしても背景画像を固定する */
+        background-attachment: fixed; 
+        
+        /* 5. 画像が繰り返されないようにする */
+        background-repeat: no-repeat; 
+      }
       
       /* 団子のスタイルとアニメーション */
   .dango-emoji {
