@@ -204,6 +204,63 @@ errorbody {
 	transform: translateY(1px);
 }
 
+/* 社員マスタメンテナンス画面だけに半透明の画像を固定配置 */
+.emp-onigashima::after {
+	content: "";
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	width: 400px;
+	height: 450px;
+	background-image: url('../images/onigashima.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	opacity: 0.25;
+	pointer-events: none;
+	z-index: -1;
+}
+
+/* --- 走るイヌ --- */
+.inu-chaser {
+	position: absolute;
+	left: -60px;
+	bottom: 12px;
+	font-size: 45px;
+	z-index: 5;
+	animation: momoMove 40s linear infinite, inuRun 0.4s ease-in-out infinite;
+	animation-delay: 3s, 0s;
+}
+
+/* イヌ走り */
+@keyframes inuRun {
+	0%, 100% {
+		transform: scaleX(-1) translateY(0) rotate(0deg);
+	}
+	50% {
+		transform: scaleX(-1) translateY(-4px) rotate(-8deg);
+	}
+}
+
+.paws-btn {
+	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><text y='20' font-size='20'>🐾</text></svg>") 12 12, pointer !important;	
+	height: 36px;
+	padding: 0 16px;
+	border: 1px solid ;
+	background:  #E8F5F8;
+	color: #12689A;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	transition: all 0.2s ease;
+}
+.paws-btn:hover {
+	background: linear-gradient(135deg, #3D91B3, #2A7291);
+	color: #FFFFFF;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+	transform: translateY(-2px);
+}
+
 /* --- 3. 表（テーブル）の罫線とデザイン --- */
 .daysTable {
 	border-collapse: collapse;

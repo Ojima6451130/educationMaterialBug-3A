@@ -144,7 +144,7 @@ function passwordDisplay(checkbox) {
 </script>
 </head>
 
-<body>
+<body class="emp-onigashima">
 	<div th:each="entry : ${dataMap}">
 		<h2 th:text="${entry.key}"></h2>
 		<ul>
@@ -280,6 +280,11 @@ function passwordDisplay(checkbox) {
 			🍑
 			<div class="ripple"></div>
 		</div>
+		
+		<!-- 桃を追いかけるイヌ -->
+		<div class="inu-chaser">
+    		🐕
+		</div>
 
 	</div>
 				
@@ -289,9 +294,9 @@ function passwordDisplay(checkbox) {
 							<td id="footLeft"></td>
 							<td id="footCenter"></td>
 							<td id="footRight"><input value="新規登録" name="button"
-								type="button" class="smallButton"
+								type="button" class="smallButton paws-btn"
 								onclick="location.href='/kikin/employeeMstMnt/regist'" /> <input
-								value="更新" name="button" type="submit" class="smallButton"
+								value="更新" name="button" type="submit" class="smallButton paws-btn"
 								onclick="return employeeMstMntUpdate()" /></td>
 						</tr>
 					</table>
